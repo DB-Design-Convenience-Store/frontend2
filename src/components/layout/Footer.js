@@ -21,12 +21,11 @@ function Footer() {
       <Row className="just">
         <Col xs={24} md={12} lg={12}>
           <div className="copyright">
-            © 2021, made with
+            © 2022 서울시립대학교 데이터베이스설계
             {<HeartFilled />} by
             <a href="#pablo" className="font-weight-bold" target="_blank">
-              Creative Tim
+              김성빈, 김지윤, 김수홍
             </a>
-            for a better web.
           </div>
         </Col>
         <Col xs={24} md={12} lg={12}>
