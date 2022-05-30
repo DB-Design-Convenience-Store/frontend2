@@ -89,30 +89,31 @@ function Home() {
 
   const timelineList = [
     {
-      title: "$2,400 - Redesign store",
-      time: "09 JUN 7:20 PM",
-      color: "green",
+      title: "₩ 2,500 - 새우탕컵라면 외 5종",
+      time: "5/30 (월)",
     },
     {
-      title: "New order #3654323",
-      time: "08 JUN 12:20 PM",
-      color: "green",
+      title: "₩ 2,500 - 새우탕컵라면 외 5종",
+      time: "5/30 (월)",
     },
     {
-      title: "Company server payments",
-      time: "04 JUN 3:10 PM",
+      title: "₩ 2,500 - 새우탕컵라면 외 5종",
+      time: "5/30 (월)",
+      color: "gray",
     },
     {
-      title: "New card added for order #4826321",
-      time: "02 JUN 2:45 PM",
+      title: "₩ 2,500 - 새우탕컵라면 외 5종",
+      time: "5/30 (월)",
+      color: "gray",
     },
     {
-      title: "Unlock folders for development",
-      time: "18 MAY 1:30 PM",
+      title: "₩ 2,500 - 새우탕컵라면 외 5종",
+      time: "5/30 (월)",
+      color: "gray",
     },
     {
-      title: "New order #46282344",
-      time: "14 MAY 3:30 PM",
+      title: "₩ 2,500 - 새우탕컵라면 외 5종",
+      time: "5/30 (월)",
       color: "gray",
     },
   ];

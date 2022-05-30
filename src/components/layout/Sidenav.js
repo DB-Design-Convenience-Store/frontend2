@@ -150,6 +150,9 @@ function Sidenav({ color }) {
       </div>
       <hr />
       <Menu theme="light" mode="inline">
+        <Menu.Item className="menu-item-header" key="5">
+          편의점 관리
+        </Menu.Item>
         <Menu.Item key="1">
           <NavLink to="/dashboard">
             <span
@@ -176,24 +179,11 @@ function Sidenav({ color }) {
             <span className="label">재고 관리</span>
           </NavLink>
         </Menu.Item>
-        <Menu.Item key="3">
-          <NavLink to="/billing">
-            <span
-              className="icon"
-              style={{
-                background: page === "billing" ? color : "",
-              }}
-            >
-              {billing}
-            </span>
-            <span className="label">결제 관리</span>
-          </NavLink>
-        </Menu.Item>
         <Menu.Item className="menu-item-header" key="5">
-          Account Pages
+          직원 관리
         </Menu.Item>
         <Menu.Item key="6">
-          <NavLink to="/profile">
+          <NavLink to="/tables_workers">
             <span
               className="icon"
               style={{
