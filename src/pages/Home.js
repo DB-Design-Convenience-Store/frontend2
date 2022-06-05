@@ -1,3 +1,4 @@
+import React from 'react';
 import { Card, Col, Row, Typography, Timeline, Radio } from 'antd';
 import Paragraph from 'antd/lib/typography/Paragraph';
 
@@ -105,15 +106,7 @@ function Home() {
       <div className="layout-content">
         <Row className="rowgap-vbox" gutter={[24, 0]}>
           {count.map((c, index) => (
-            <Col
-              key={index}
-              xs={24}
-              sm={24}
-              md={12}
-              lg={6}
-              xl={6}
-              className="mb-24"
-            >
+            <Col key={index} xs={24} sm={24} md={12} lg={6} xl={6} className="mb-24">
               <Card bordered={false} className="criclebox ">
                 <div className="number">
                   <Row align="middle" gutter={[24, 0]}>
@@ -178,19 +171,12 @@ function Home() {
                       <tr key={index}>
                         <td>
                           <h6>
-                            <img
-                              src={d.img}
-                              alt=""
-                              className="avatar-sm mr-10"
-                            />{' '}
-                            {d.Title}
+                            <img src={d.img} alt="" className="avatar-sm mr-10" /> {d.Title}
                           </h6>
                         </td>
                         <td>{d.member}</td>
                         <td>
-                          <span className="text-xs font-weight-bold">
-                            {d.bud}{' '}
-                          </span>
+                          <span className="text-xs font-weight-bold">{d.bud} </span>
                         </td>
                         <td>
                           <div className="percent-progress">{d.progress}</div>
@@ -210,11 +196,7 @@ function Home() {
                   어제 이 시간보다 <span className="bnb2">20%</span> 상승
                 </Paragraph>
 
-                <Timeline
-                  pending="실시간 확인중..."
-                  className="timelinelist"
-                  reverse={false}
-                >
+                <Timeline pending="실시간 확인중..." className="timelinelist" reverse={false}>
                   {timelineList.map((t, index) => (
                     <Timeline.Item color={t.color} key={index}>
                       <Title level={5}>{t.title}</Title>

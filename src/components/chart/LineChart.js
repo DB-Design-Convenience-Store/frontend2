@@ -1,3 +1,4 @@
+import React from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { Typography } from 'antd';
 import { MinusOutlined } from '@ant-design/icons';

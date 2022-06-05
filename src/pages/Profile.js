@@ -1,25 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-import {
-  Row,
-  Col,
-  Card,
-  Button,
-  List,
-  Descriptions,
-  Avatar,
-  Radio,
-  Switch,
-  Upload,
-  message,
-} from 'antd';
+import { Row, Col, Card, Button, List, Descriptions, Avatar, Radio, Switch, Upload, message } from 'antd';
 
-import {
-  FacebookOutlined,
-  TwitterOutlined,
-  InstagramOutlined,
-  VerticalAlignTopOutlined,
-} from '@ant-design/icons';
+import { FacebookOutlined, TwitterOutlined, InstagramOutlined, VerticalAlignTopOutlined } from '@ant-design/icons';
 
 import BgProfile from '../assets/images/bg-profile.jpg';
 import profilavatar from '../assets/images/face-1.jpg';
@@ -68,22 +51,12 @@ function Profile() {
   };
 
   const pencil = [
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      key={0}
-    >
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" key={0}>
       <path
         d="M13.5858 3.58579C14.3668 2.80474 15.6332 2.80474 16.4142 3.58579C17.1953 4.36683 17.1953 5.63316 16.4142 6.41421L15.6213 7.20711L12.7929 4.37868L13.5858 3.58579Z"
         className="fill-gray-7"
       ></path>
-      <path
-        d="M11.3787 5.79289L3 14.1716V17H5.82842L14.2071 8.62132L11.3787 5.79289Z"
-        className="fill-gray-7"
-      ></path>
+      <path d="M11.3787 5.79289L3 14.1716V17H5.82842L14.2071 8.62132L11.3787 5.79289Z" className="fill-gray-7"></path>
     </svg>,
   ];
 
@@ -127,31 +100,25 @@ function Profile() {
       img: project1,
       titlesub: 'Project #1',
       title: 'Modern',
-      disciption:
-        'As Uber works through a huge amount of internal management turmoil.',
+      disciption: 'As Uber works through a huge amount of internal management turmoil.',
     },
     {
       img: project2,
       titlesub: 'Project #2',
       title: 'Scandinavian',
-      disciption:
-        'Music is something that every person has his or her own specific opinion about.',
+      disciption: 'Music is something that every person has his or her own specific opinion about.',
     },
     {
       img: project3,
       titlesub: 'Project #3',
       title: 'Minimalist',
-      disciption:
-        'Different people have different taste, and various types of music, Zimbali Resort',
+      disciption: 'Different people have different taste, and various types of music, Zimbali Resort',
     },
   ];
 
   return (
     <>
-      <div
-        className="profile-nav-bg"
-        style={{ backgroundImage: 'url(' + BgProfile + ')' }}
-      ></div>
+      <div className="profile-nav-bg" style={{ backgroundImage: 'url(' + BgProfile + ')' }}></div>
 
       <Card
         className="card-profile-head"
@@ -212,9 +179,7 @@ function Profile() {
                 <span>Email me when someone mentions me</span>
               </li>
               <li>
-                <h6 className="list-header text-sm text-muted m-0">
-                  APPLICATION
-                </h6>
+                <h6 className="list-header text-sm text-muted m-0">APPLICATION</h6>
               </li>
               <li>
                 <Switch defaultChecked />
@@ -241,10 +206,8 @@ function Profile() {
           >
             <p className="text-dark">
               {' '}
-              Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer
-              is no. If two equally difficult paths, choose the one more painful
-              in the short term (pain avoidance is creating an illusion of
-              equality).{' '}
+              Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths,
+              choose the one more painful in the short term (pain avoidance is creating an illusion of equality).{' '}
             </p>
             <hr className="my-25" />
             <Descriptions title="Oliver Liam">
@@ -289,9 +252,7 @@ function Profile() {
               renderItem={(item) => (
                 <List.Item actions={[<Button type="link">REPLY</Button>]}>
                   <List.Item.Meta
-                    avatar={
-                      <Avatar shape="square" size={48} src={item.avatar} />
-                    }
+                    avatar={<Avatar shape="square" size={48} src={item.avatar} />}
                     title={item.title}
                     description={item.description}
                   />
@@ -314,11 +275,7 @@ function Profile() {
         <Row gutter={[24, 24]}>
           {project.map((p, index) => (
             <Col span={24} md={12} xl={6} key={index}>
-              <Card
-                bordered={false}
-                className="card-project"
-                cover={<img alt="example" src={p.img} />}
-              >
+              <Card bordered={false} className="card-project" cover={<img alt="example" src={p.img} />}>
                 <div className="card-tag">{p.titlesub}</div>
                 <h5>{p.titile}</h5>
                 <p>{p.disciption}</p>
@@ -348,11 +305,7 @@ function Profile() {
               beforeUpload={beforeUpload}
               onChange={handleChange}
             >
-              {imageURL ? (
-                <img src={imageURL} alt="avatar" style={{ width: '100%' }} />
-              ) : (
-                uploadButton
-              )}
+              {imageURL ? <img src={imageURL} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
             </Upload>
           </Col>
         </Row>

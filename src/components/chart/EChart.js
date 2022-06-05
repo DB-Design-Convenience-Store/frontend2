@@ -1,3 +1,4 @@
+import React from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { Row, Col, Typography } from 'antd';
 import eChart from './configs/eChart';
@@ -27,13 +28,7 @@ function EChart() {
   return (
     <>
       <div id="chart">
-        <ReactApexChart
-          className="bar-chart"
-          options={eChart.options}
-          series={eChart.series}
-          type="bar"
-          height={220}
-        />
+        <ReactApexChart className="bar-chart" options={eChart.options} series={eChart.series} type="bar" height={220} />
       </div>
       <div className="chart-vistior">
         <Title level={5}>주별 매출 현황</Title>

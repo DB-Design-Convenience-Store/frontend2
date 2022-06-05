@@ -1,13 +1,5 @@
-import {
-  Row,
-  Col,
-  Card,
-  Statistic,
-  Button,
-  List,
-  Descriptions,
-  Avatar,
-} from 'antd';
+import React from 'react';
+import { Row, Col, Card, Statistic, Button, List, Descriptions, Avatar } from 'antd';
 
 import { PlusOutlined, ExclamationOutlined } from '@ant-design/icons';
 import mastercard from '../assets/images/mastercard-logo.png';
@@ -44,22 +36,9 @@ function Billing() {
   ];
 
   const wifi = [
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="25"
-      height="25"
-      viewBox="0 0 22.5 20.625"
-      key={0}
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 22.5 20.625" key={0}>
       <g id="wifi" transform="translate(0.75 0.75)">
-        <circle
-          id="Oval"
-          cx="1.5"
-          cy="1.5"
-          r="1.5"
-          transform="translate(9 16.875)"
-          fill="#fff"
-        ></circle>
+        <circle id="Oval" cx="1.5" cy="1.5" r="1.5" transform="translate(9 16.875)" fill="#fff"></circle>
         <path
           id="Path"
           d="M0,1.36a6.377,6.377,0,0,1,7.5,0"
@@ -99,13 +78,7 @@ function Billing() {
   ];
 
   const angle = [
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="22"
-      height="22"
-      viewBox="0 0 22 22"
-      key={0}
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" key={0}>
       <g id="bank" transform="translate(0.75 0.75)">
         <path
           id="Shape"
@@ -144,33 +117,16 @@ function Billing() {
   ];
 
   const pencil = [
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      key={0}
-    >
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" key={0}>
       <path
         d="M13.5858 3.58579C14.3668 2.80474 15.6332 2.80474 16.4142 3.58579C17.1953 4.36683 17.1953 5.63316 16.4142 6.41421L15.6213 7.20711L12.7929 4.37868L13.5858 3.58579Z"
         className="fill-gray-7"
       ></path>
-      <path
-        d="M11.3787 5.79289L3 14.1716V17H5.82842L14.2071 8.62132L11.3787 5.79289Z"
-        className="fill-gray-7"
-      ></path>
+      <path d="M11.3787 5.79289L3 14.1716V17H5.82842L14.2071 8.62132L11.3787 5.79289Z" className="fill-gray-7"></path>
     </svg>,
   ];
   const download = [
-    <svg
-      width="15"
-      height="15"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      key="0"
-    >
+    <svg width="15" height="15" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" key="0">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -180,14 +136,7 @@ function Billing() {
     </svg>,
   ];
   const deletebtn = [
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      key={0}
-    >
+    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" key={0}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -218,14 +167,7 @@ function Billing() {
     },
   ];
   const calender = [
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      key={0}
-    >
+    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" key={0}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -236,14 +178,7 @@ function Billing() {
     </svg>,
   ];
   const mins = [
-    <svg
-      width="10"
-      height="10"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      key={0}
-    >
+    <svg width="10" height="10" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" key={0}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -312,11 +247,7 @@ function Billing() {
         <Col xs={24} md={16}>
           <Row gutter={[24, 0]}>
             <Col xs={24} xl={12} className="mb-24">
-              <Card
-                title={wifi}
-                bordered={false}
-                className="card-credit header-solid h-ful"
-              >
+              <Card title={wifi} bordered={false} className="card-credit header-solid h-ful">
                 <h5 className="card-number">4562 1122 4594 7852</h5>
 
                 <div className="card-footer">
@@ -371,10 +302,7 @@ function Billing() {
                 className="header-solid h-full ant-card-p-0"
                 title={
                   <>
-                    <Row
-                      gutter={[24, 0]}
-                      className="ant-row-flex ant-row-flex-middle"
-                    >
+                    <Row gutter={[24, 0]} className="ant-row-flex ant-row-flex-middle">
                       <Col xs={24} md={12}>
                         <h6 className="font-semibold m-0">Payment Methods</h6>
                       </Col>
@@ -425,13 +353,8 @@ function Billing() {
               className="invoice-list"
               dataSource={data}
               renderItem={(item) => (
-                <List.Item
-                  actions={[<Button type="link">{download} PDF</Button>]}
-                >
-                  <List.Item.Meta
-                    title={item.title}
-                    description={item.description}
-                  />
+                <List.Item actions={[<Button type="link">{download} PDF</Button>]}>
+                  <List.Item.Meta title={item.title} description={item.description} />
                   <div className="amount">{item.amount}</div>
                 </List.Item>
               )}

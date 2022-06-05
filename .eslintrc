@@ -1,8 +1,35 @@
 {
-  "extends": ["react-app", "eslint:recommended", "plugin:prettier/recommended"],
-  "plugins": ["prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "prettier",
+    "react",
+    "react-hooks"
+  ],
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "react/prop-types": "off",
+    "react/jsx-key": "off"
   },
-  "ignorePatterns": ["node_modules", "build", "dist", "public"]
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "ignorePatterns": [
+    "node_modules",
+    "build",
+    "dist",
+    "public"
+  ]
 }

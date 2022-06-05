@@ -1,3 +1,4 @@
+import React from 'react';
 import { Row, Col, Card, Radio, Table, Button, Avatar, Typography } from 'antd';
 
 import face from '../assets/images/face-1.jpg';
@@ -41,12 +42,7 @@ const data = [
     name: (
       <>
         <Avatar.Group>
-          <Avatar
-            className="shape-avatar"
-            shape="square"
-            size={40}
-            src={face2}
-          ></Avatar>
+          <Avatar className="shape-avatar" shape="square" size={40} src={face2}></Avatar>
           <div className="avatar-info">
             <Title level={5}>김성빈</Title>
             <p>010-0000-0000</p>
@@ -85,12 +81,7 @@ const data = [
     name: (
       <>
         <Avatar.Group>
-          <Avatar
-            className="shape-avatar"
-            shape="square"
-            size={40}
-            src={face3}
-          ></Avatar>
+          <Avatar className="shape-avatar" shape="square" size={40} src={face3}></Avatar>
           <div className="avatar-info">
             <Title level={5}>오우택</Title>
             <p>010-0000-0000</p>
@@ -127,12 +118,7 @@ const data = [
     name: (
       <>
         <Avatar.Group>
-          <Avatar
-            className="shape-avatar"
-            shape="square"
-            size={40}
-            src={face}
-          ></Avatar>
+          <Avatar className="shape-avatar" shape="square" size={40} src={face}></Avatar>
           <div className="avatar-info">
             <Title level={5}>현창호</Title>
             <p>010-0000-0000</p>
@@ -168,12 +154,7 @@ const data = [
     name: (
       <>
         <Avatar.Group>
-          <Avatar
-            className="shape-avatar"
-            shape="square"
-            size={40}
-            src={face4}
-          ></Avatar>
+          <Avatar className="shape-avatar" shape="square" size={40} src={face4}></Avatar>
           <div className="avatar-info">
             <Title level={5}>조용재</Title>
             <p>010-0000-0000</p>
@@ -209,12 +190,7 @@ const data = [
     name: (
       <>
         <Avatar.Group>
-          <Avatar
-            className="shape-avatar"
-            shape="square"
-            size={40}
-            src={face5}
-          ></Avatar>
+          <Avatar className="shape-avatar" shape="square" size={40} src={face5}></Avatar>
           <div className="avatar-info">
             <Title level={5}>이한솔</Title>
             <p>010-0000-0000</p>
@@ -250,12 +226,7 @@ const data = [
     name: (
       <>
         <Avatar.Group>
-          <Avatar
-            className="shape-avatar"
-            shape="square"
-            size={40}
-            src={face6}
-          ></Avatar>
+          <Avatar className="shape-avatar" shape="square" size={40} src={face6}></Avatar>
           <div className="avatar-info">
             <Title level={5}>김종현</Title>
             <p>010-0000-0000</p>
@@ -310,12 +281,7 @@ function Tables() {
               }
             >
               <div className="table-responsive">
-                <Table
-                  columns={columns}
-                  dataSource={data}
-                  pagination={false}
-                  className="ant-border-space"
-                />
+                <Table columns={columns} dataSource={data} pagination={false} className="ant-border-space" />
               </div>
             </Card>
           </Col>

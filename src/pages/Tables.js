@@ -1,3 +1,4 @@
+import React from 'react';
 import { Row, Col, Card, Radio, Table, Button, Avatar, Typography } from 'antd';
 
 const { Title } = Typography;
@@ -192,12 +193,7 @@ function Tables() {
               }
             >
               <div className="table-responsive">
-                <Table
-                  columns={columns}
-                  dataSource={data}
-                  pagination={false}
-                  className="ant-border-space"
-                />
+                <Table columns={columns} dataSource={data} pagination={false} className="ant-border-space" />
               </div>
             </Card>
           </Col>
