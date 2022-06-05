@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Layout,
   Menu,
@@ -8,29 +8,29 @@ import {
   Form,
   Input,
   Checkbox,
-} from "antd";
-import logo1 from "../assets/images/logos-facebook.svg";
-import logo2 from "../assets/images/logo-apple.svg";
-import logo3 from "../assets/images/Google__G__Logo.svg.png";
+} from 'antd';
+import logo1 from '../assets/images/logos-facebook.svg';
+import logo2 from '../assets/images/logo-apple.svg';
+import logo3 from '../assets/images/Google__G__Logo.svg.png';
 
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import {
   DribbbleOutlined,
   TwitterOutlined,
   InstagramOutlined,
   GithubOutlined,
-} from "@ant-design/icons";
+} from '@ant-design/icons';
 
 const { Title } = Typography;
 const { Header, Footer, Content } = Layout;
 export default class SignUp extends Component {
   render() {
     const onFinish = (values) => {
-      console.log("Success:", values);
+      console.log('Success:', values);
     };
 
     const onFinishFailed = (errorInfo) => {
-      console.log("Failed:", errorInfo);
+      console.log('Failed:', errorInfo);
     };
     return (
       <>
@@ -39,8 +39,7 @@ export default class SignUp extends Component {
             <div className="header-col header-brand">
               <h5>UOS25</h5>
             </div>
-            <div className="header-col header-nav">
-            </div>
+            <div className="header-col header-nav"></div>
             <div className="header-col header-btn">
               <Button type="false">Sign In</Button>
             </div>
@@ -80,7 +79,7 @@ export default class SignUp extends Component {
                 <Form.Item
                   name="Name"
                   rules={[
-                    { required: true, message: "Please input your username!" },
+                    { required: true, message: 'Please input your username!' },
                   ]}
                 >
                   <Input placeholder="Name" />
@@ -88,7 +87,7 @@ export default class SignUp extends Component {
                 <Form.Item
                   name="email"
                   rules={[
-                    { required: true, message: "Please input your email!" },
+                    { required: true, message: 'Please input your email!' },
                   ]}
                 >
                   <Input placeholder="email" />
@@ -96,7 +95,7 @@ export default class SignUp extends Component {
                 <Form.Item
                   name="password"
                   rules={[
-                    { required: true, message: "Please input your password!" },
+                    { required: true, message: 'Please input your password!' },
                   ]}
                 >
                   <Input placeholder="Passwoed" />
@@ -104,7 +103,7 @@ export default class SignUp extends Component {
 
                 <Form.Item name="remember" valuePropName="checked">
                   <Checkbox>
-                    I agree the{" "}
+                    I agree the{' '}
                     <a href="#pablo" className="font-bold text-dark">
                       Terms and Conditions
                     </a>
@@ -113,7 +112,7 @@ export default class SignUp extends Component {
 
                 <Form.Item>
                   <Button
-                    style={{ width: "100%" }}
+                    style={{ width: '100%' }}
                     type="primary"
                     htmlType="submit"
                   >
@@ -122,7 +121,7 @@ export default class SignUp extends Component {
                 </Form.Item>
               </Form>
               <p className="font-semibold text-muted text-center">
-                Already have an account?{" "}
+                Already have an account?{' '}
                 <Link to="/sign-in" className="font-bold text-dark">
                   Sign In
                 </Link>

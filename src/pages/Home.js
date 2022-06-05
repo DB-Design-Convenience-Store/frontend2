@@ -1,17 +1,10 @@
-import {
-  Card,
-  Col,
-  Row,
-  Typography,
-  Timeline,
-  Radio,
-} from "antd";
-import Paragraph from "antd/lib/typography/Paragraph";
+import { Card, Col, Row, Typography, Timeline, Radio } from 'antd';
+import Paragraph from 'antd/lib/typography/Paragraph';
 
-import Echart from "../components/chart/EChart";
-import LineChart from "../components/chart/LineChart";
+import Echart from '../components/chart/EChart';
+import LineChart from '../components/chart/LineChart';
 
-import ava1 from "../assets/images/logo-shopify.svg";
+import ava1 from '../assets/images/logo-shopify.svg';
 
 function Home() {
   const { Title, Text } = Typography;
@@ -20,90 +13,90 @@ function Home() {
 
   const count = [
     {
-      today: "일매출",
-      title: "₩ 752,200",
-      persent: "-40%",
-      bnb: "redtext",
+      today: '일매출',
+      title: '₩ 752,200',
+      persent: '-40%',
+      bnb: 'redtext',
     },
     {
-      today: "주매출",
-      title: "₩ 14,020,100",
-      persent: "+20%",
-      bnb: "bnb2",
+      today: '주매출',
+      title: '₩ 14,020,100',
+      persent: '+20%',
+      bnb: 'bnb2',
     },
     {
-      today: "월매출",
-      title: "₩ 50,105,200",
-      persent: "-20%",
-      bnb: "redtext",
+      today: '월매출',
+      title: '₩ 50,105,200',
+      persent: '-20%',
+      bnb: 'redtext',
     },
     {
-      today: "연매출",
-      title: "₩ 720,101,200",
-      persent: "+10%",
-      bnb: "bnb2",
+      today: '연매출',
+      title: '₩ 720,101,200',
+      persent: '+10%',
+      bnb: 'bnb2',
     },
   ];
 
   const list = [
     {
       img: ava1,
-      Title: "포카칩(기본)",
-      bud: "₩100,000",
+      Title: '포카칩(기본)',
+      bud: '₩100,000',
       progress: 50,
-      member: "5/30 (월)",
+      member: '5/30 (월)',
     },
     {
       img: ava1,
-      Title: "새우탕컵라면",
-      bud: "₩50,000",
+      Title: '새우탕컵라면',
+      bud: '₩50,000',
       progress: 50,
-      member: "5/30 (월)",
+      member: '5/30 (월)',
     },
     {
       img: ava1,
-      Title: "참치김밥",
-      bud: "₩100,000",
+      Title: '참치김밥',
+      bud: '₩100,000',
       progress: 50,
-      member: "5/30 (월)",
+      member: '5/30 (월)',
     },
     {
       img: ava1,
-      Title: "빼빼로(기본)",
-      bud: "₩50,000",
+      Title: '빼빼로(기본)',
+      bud: '₩50,000',
       progress: 50,
-      member: "5/30 (월)",
+      member: '5/30 (월)',
     },
   ];
 
   const timelineList = [
     {
-      title: "₩ 2,500 - 새우탕컵라면 외 5종",
-      time: "5/30 (월)",
+      title: '₩ 2,500 - 새우탕컵라면 외 5종',
+      time: '5/30 (월)',
     },
     {
-      title: "₩ 2,500 - 새우탕컵라면 외 5종",
-      time: "5/30 (월)",
+      title: '₩ 2,500 - 새우탕컵라면 외 5종',
+      time: '5/30 (월)',
     },
     {
-      title: "₩ 2,500 - 새우탕컵라면 외 5종",
-      time: "5/30 (월)",
-      color: "gray",
+      title: '₩ 2,500 - 새우탕컵라면 외 5종',
+      time: '5/30 (월)',
+      color: 'gray',
     },
     {
-      title: "₩ 2,500 - 새우탕컵라면 외 5종",
-      time: "5/30 (월)",
-      color: "gray",
+      title: '₩ 2,500 - 새우탕컵라면 외 5종',
+      time: '5/30 (월)',
+      color: 'gray',
     },
     {
-      title: "₩ 2,500 - 새우탕컵라면 외 5종",
-      time: "5/30 (월)",
-      color: "gray",
+      title: '₩ 2,500 - 새우탕컵라면 외 5종',
+      time: '5/30 (월)',
+      color: 'gray',
     },
     {
-      title: "₩ 2,500 - 새우탕컵라면 외 5종",
-      time: "5/30 (월)",
-      color: "gray",
+      title: '₩ 2,500 - 새우탕컵라면 외 5종',
+      time: '5/30 (월)',
+      color: 'gray',
     },
   ];
 
@@ -189,14 +182,14 @@ function Home() {
                               src={d.img}
                               alt=""
                               className="avatar-sm mr-10"
-                            />{" "}
+                            />{' '}
                             {d.Title}
                           </h6>
                         </td>
                         <td>{d.member}</td>
                         <td>
                           <span className="text-xs font-weight-bold">
-                            {d.bud}{" "}
+                            {d.bud}{' '}
                           </span>
                         </td>
                         <td>

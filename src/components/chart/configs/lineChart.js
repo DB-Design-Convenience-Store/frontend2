@@ -1,12 +1,12 @@
 const lineChart = {
   series: [
     {
-      name: "입고",
+      name: '입고',
       data: [350, 340, 500, 450, 490, 350],
       offsetY: 0,
     },
     {
-      name: "판매",
+      name: '판매',
       data: [230, 240, 490, 310, 400, 240],
       offsetY: 0,
     },
@@ -14,9 +14,9 @@ const lineChart = {
 
   options: {
     chart: {
-      width: "100%",
+      width: '100%',
       height: 350,
-      type: "area",
+      type: 'area',
       toolbar: {
         show: false,
       },
@@ -30,15 +30,15 @@ const lineChart = {
       enabled: false,
     },
     stroke: {
-      curve: "smooth",
+      curve: 'smooth',
     },
 
     yaxis: {
       labels: {
         style: {
-          fontSize: "14px",
+          fontSize: '14px',
           fontWeight: 600,
-          colors: ["#8c8c8c"],
+          colors: ['#8c8c8c'],
         },
       },
     },
@@ -46,28 +46,28 @@ const lineChart = {
     xaxis: {
       labels: {
         style: {
-          fontSize: "14px",
+          fontSize: '14px',
           fontWeight: 600,
           colors: [
-            "#8c8c8c",
-            "#8c8c8c",
-            "#8c8c8c",
-            "#8c8c8c",
-            "#8c8c8c",
-            "#8c8c8c",
-            "#8c8c8c",
-            "#8c8c8c",
-            "#8c8c8c",
+            '#8c8c8c',
+            '#8c8c8c',
+            '#8c8c8c',
+            '#8c8c8c',
+            '#8c8c8c',
+            '#8c8c8c',
+            '#8c8c8c',
+            '#8c8c8c',
+            '#8c8c8c',
           ],
         },
       },
       categories: [
-        "5/1 - 5/7",
-        "5/8 - 5/15",
-        "5/16 - 5/22",
-        "5/23 - 5/29",
-        "5/30 - 6/5",
-        "6/6 - 6/12",
+        '5/1 - 5/7',
+        '5/8 - 5/15',
+        '5/16 - 5/22',
+        '5/23 - 5/29',
+        '5/30 - 6/5',
+        '6/6 - 6/12',
       ],
     },
 

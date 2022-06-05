@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Layout,
   Menu,
@@ -10,14 +10,14 @@ import {
   Form,
   Input,
   Switch,
-} from "antd";
-import signinbg from "../assets/images/img-signin.jpg";
+} from 'antd';
+import signinbg from '../assets/images/img-signin.jpg';
 import {
   DribbbleOutlined,
   TwitterOutlined,
   InstagramOutlined,
   GithubOutlined,
-} from "@ant-design/icons";
+} from '@ant-design/icons';
 function onChange(checked) {
   console.log(`switch to ${checked}`);
 }
@@ -26,11 +26,11 @@ const { Header, Footer, Content } = Layout;
 export default class SignIn extends Component {
   render() {
     const onFinish = (values) => {
-      console.log("Success:", values);
+      console.log('Success:', values);
     };
 
     const onFinishFailed = (errorInfo) => {
-      console.log("Failed:", errorInfo);
+      console.log('Failed:', errorInfo);
     };
     return (
       <>
@@ -39,8 +39,7 @@ export default class SignIn extends Component {
             <div className="header-col header-brand">
               <h5>UOS25</h5>
             </div>
-            <div className="header-col header-nav">
-            </div>
+            <div className="header-col header-nav"></div>
             <div className="header-col header-btn">
               <Button type="primary">Sign Up</Button>
             </div>
@@ -69,7 +68,7 @@ export default class SignIn extends Component {
                     rules={[
                       {
                         required: true,
-                        message: "Please input your email!",
+                        message: 'Please input your email!',
                       },
                     ]}
                   >
@@ -83,7 +82,7 @@ export default class SignIn extends Component {
                     rules={[
                       {
                         required: true,
-                        message: "Please input your password!",
+                        message: 'Please input your password!',
                       },
                     ]}
                   >
@@ -103,13 +102,13 @@ export default class SignIn extends Component {
                     <Button
                       type="primary"
                       htmlType="submit"
-                      style={{ width: "100%" }}
+                      style={{ width: '100%' }}
                     >
                       SIGN IN
                     </Button>
                   </Form.Item>
                   <p className="font-semibold text-muted">
-                    Don't have an account?{" "}
+                    Don't have an account?{' '}
                     <Link to="/sign-up" className="text-dark font-bold">
                       Sign Up
                     </Link>

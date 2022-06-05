@@ -1,10 +1,10 @@
-import { Menu, Button } from "antd";
-import { NavLink, useLocation } from "react-router-dom";
-import logo from "../../assets/images/logo.png";
+import { Menu, Button } from 'antd';
+import { NavLink, useLocation } from 'react-router-dom';
+import logo from '../../assets/images/uos25-2.png';
 
 function Sidenav({ color }) {
   const { pathname } = useLocation();
-  const page = pathname.replace("/", "");
+  const page = pathname.replace('/', '');
 
   const dashboard = [
     <svg
@@ -111,7 +111,6 @@ function Sidenav({ color }) {
     <>
       <div className="brand">
         <img src={logo} alt="" />
-        <span>UOS25</span>
       </div>
       <hr />
       <Menu theme="light" mode="inline">
@@ -123,7 +122,7 @@ function Sidenav({ color }) {
             <span
               className="icon"
               style={{
-                background: page === "dashboard" ? color : "",
+                background: page === 'dashboard' ? color : '',
               }}
             >
               {dashboard}
@@ -136,7 +135,7 @@ function Sidenav({ color }) {
             <span
               className="icon"
               style={{
-                background: page === "tables" ? color : "",
+                background: page === 'tables' ? color : '',
               }}
             >
               {tables}
@@ -152,7 +151,7 @@ function Sidenav({ color }) {
             <span
               className="icon"
               style={{
-                background: page === "profile" ? color : "",
+                background: page === 'profile' ? color : '',
               }}
             >
               {profile}

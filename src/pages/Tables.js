@@ -1,51 +1,38 @@
-import {
-  Row,
-  Col,
-  Card,
-  Radio,
-  Table,
-  Button,
-  Avatar,
-  Typography,
-} from "antd";
+import { Row, Col, Card, Radio, Table, Button, Avatar, Typography } from 'antd';
 
 const { Title } = Typography;
 
 // table code start
 const columns = [
   {
-    title: "품목명",
-    dataIndex: "name",
-    key: "name",
-    width: "32%",
+    title: '품목명',
+    dataIndex: 'name',
+    key: 'name',
+    width: '32%',
   },
   {
-    title: "재고 수량",
-    dataIndex: "function",
-    key: "function",
+    title: '재고 수량',
+    dataIndex: 'function',
+    key: 'function',
   },
   {
-    title: "주문 일자",
-    key: "employed",
-    dataIndex: "employed",
+    title: '주문 일자',
+    key: 'employed',
+    dataIndex: 'employed',
   },
 ];
 
 const data = [
   {
-    key: "1",
+    key: '1',
     name: (
       <>
         <Avatar.Group>
-          <Avatar
-            className="shape-avatar"
-            shape="square"
-            size={40}
-          ></Avatar>
+          <Avatar className="shape-avatar" shape="square" size={40}></Avatar>
           <div className="avatar-info">
             <Title level={5}>포카칩(기본)</Title>
           </div>
-        </Avatar.Group>{" "}
+        </Avatar.Group>{' '}
       </>
     ),
     function: (
@@ -74,19 +61,15 @@ const data = [
   },
 
   {
-    key: "2",
+    key: '2',
     name: (
       <>
         <Avatar.Group>
-          <Avatar
-            className="shape-avatar"
-            shape="square"
-            size={40}
-          ></Avatar>
+          <Avatar className="shape-avatar" shape="square" size={40}></Avatar>
           <div className="avatar-info">
             <Title level={5}>새우탕컵라면</Title>
           </div>
-        </Avatar.Group>{" "}
+        </Avatar.Group>{' '}
       </>
     ),
     function: (
@@ -113,19 +96,15 @@ const data = [
   },
 
   {
-    key: "3",
+    key: '3',
     name: (
       <>
         <Avatar.Group>
-          <Avatar
-            className="shape-avatar"
-            shape="square"
-            size={40}
-          ></Avatar>
+          <Avatar className="shape-avatar" shape="square" size={40}></Avatar>
           <div className="avatar-info">
             <Title level={5}>참치김밥</Title>
           </div>
-        </Avatar.Group>{" "}
+        </Avatar.Group>{' '}
       </>
     ),
     function: (
@@ -153,19 +132,15 @@ const data = [
     ),
   },
   {
-    key: "4",
+    key: '4',
     name: (
       <>
         <Avatar.Group>
-          <Avatar
-            className="shape-avatar"
-            shape="square"
-            size={40}
-          ></Avatar>
+          <Avatar className="shape-avatar" shape="square" size={40}></Avatar>
           <div className="avatar-info">
             <Title level={5}>빼빼로(기본)</Title>
           </div>
-        </Avatar.Group>{" "}
+        </Avatar.Group>{' '}
       </>
     ),
     function: (
@@ -225,7 +200,6 @@ function Tables() {
                 />
               </div>
             </Card>
-
           </Col>
         </Row>
       </div>

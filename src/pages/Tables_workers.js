@@ -1,52 +1,43 @@
-import {
-  Row,
-  Col,
-  Card,
-  Radio,
-  Table,
-  Button,
-  Avatar,
-  Typography,
-} from "antd";
+import { Row, Col, Card, Radio, Table, Button, Avatar, Typography } from 'antd';
 
-import face from "../assets/images/face-1.jpg";
-import face2 from "../assets/images/face-2.jpg";
-import face3 from "../assets/images/face-3.jpg";
-import face4 from "../assets/images/face-4.jpg";
-import face5 from "../assets/images/face-5.jpeg";
-import face6 from "../assets/images/face-6.jpeg";
+import face from '../assets/images/face-1.jpg';
+import face2 from '../assets/images/face-2.jpg';
+import face3 from '../assets/images/face-3.jpg';
+import face4 from '../assets/images/face-4.jpg';
+import face5 from '../assets/images/face-5.jpeg';
+import face6 from '../assets/images/face-6.jpeg';
 
 const { Title } = Typography;
 
 // table code start
 const columns = [
   {
-    title: "이름",
-    dataIndex: "name",
-    key: "name",
-    width: "32%",
+    title: '이름',
+    dataIndex: 'name',
+    key: 'name',
+    width: '32%',
   },
   {
-    title: "직책",
-    dataIndex: "function",
-    key: "function",
+    title: '직책',
+    dataIndex: 'function',
+    key: 'function',
   },
 
   {
-    title: "근무여부",
-    key: "status",
-    dataIndex: "status",
+    title: '근무여부',
+    key: 'status',
+    dataIndex: 'status',
   },
   {
-    title: "채용일",
-    key: "employed",
-    dataIndex: "employed",
+    title: '채용일',
+    key: 'employed',
+    dataIndex: 'employed',
   },
 ];
 
 const data = [
   {
-    key: "1",
+    key: '1',
     name: (
       <>
         <Avatar.Group>
@@ -60,7 +51,7 @@ const data = [
             <Title level={5}>김성빈</Title>
             <p>010-0000-0000</p>
           </div>
-        </Avatar.Group>{" "}
+        </Avatar.Group>{' '}
       </>
     ),
     function: (
@@ -90,7 +81,7 @@ const data = [
   },
 
   {
-    key: "2",
+    key: '2',
     name: (
       <>
         <Avatar.Group>
@@ -104,7 +95,7 @@ const data = [
             <Title level={5}>오우택</Title>
             <p>010-0000-0000</p>
           </div>
-        </Avatar.Group>{" "}
+        </Avatar.Group>{' '}
       </>
     ),
     function: (
@@ -132,7 +123,7 @@ const data = [
   },
 
   {
-    key: "3",
+    key: '3',
     name: (
       <>
         <Avatar.Group>
@@ -146,7 +137,7 @@ const data = [
             <Title level={5}>현창호</Title>
             <p>010-0000-0000</p>
           </div>
-        </Avatar.Group>{" "}
+        </Avatar.Group>{' '}
       </>
     ),
     function: (
@@ -160,9 +151,7 @@ const data = [
 
     status: (
       <>
-        <Button className="tag-badge">
-          근무중
-        </Button>
+        <Button className="tag-badge">근무중</Button>
       </>
     ),
     employed: (
@@ -175,7 +164,7 @@ const data = [
     ),
   },
   {
-    key: "4",
+    key: '4',
     name: (
       <>
         <Avatar.Group>
@@ -189,7 +178,7 @@ const data = [
             <Title level={5}>조용재</Title>
             <p>010-0000-0000</p>
           </div>
-        </Avatar.Group>{" "}
+        </Avatar.Group>{' '}
       </>
     ),
     function: (
@@ -203,9 +192,7 @@ const data = [
 
     status: (
       <>
-        <Button className="tag-badge">
-          근무중
-        </Button>
+        <Button className="tag-badge">근무중</Button>
       </>
     ),
     employed: (
@@ -218,7 +205,7 @@ const data = [
     ),
   },
   {
-    key: "5",
+    key: '5',
     name: (
       <>
         <Avatar.Group>
@@ -232,7 +219,7 @@ const data = [
             <Title level={5}>이한솔</Title>
             <p>010-0000-0000</p>
           </div>
-        </Avatar.Group>{" "}
+        </Avatar.Group>{' '}
       </>
     ),
     function: (
@@ -259,7 +246,7 @@ const data = [
   },
 
   {
-    key: "6",
+    key: '6',
     name: (
       <>
         <Avatar.Group>
@@ -273,7 +260,7 @@ const data = [
             <Title level={5}>김종현</Title>
             <p>010-0000-0000</p>
           </div>
-        </Avatar.Group>{" "}
+        </Avatar.Group>{' '}
       </>
     ),
     function: (
@@ -331,7 +318,6 @@ function Tables() {
                 />
               </div>
             </Card>
-
           </Col>
         </Row>
       </div>

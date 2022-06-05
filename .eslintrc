@@ -1,13 +1,8 @@
 {
   "extends": ["react-app", "eslint:recommended", "plugin:prettier/recommended"],
-  "plugins": [ "prettier"],
+  "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": "error"
   },
-  "ignorePatterns": [
-    "node_modules",
-    "build",
-    "dist",
-    "public"
-  ]
+  "ignorePatterns": ["node_modules", "build", "dist", "public"]
 }

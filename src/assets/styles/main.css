@@ -43,7 +43,11 @@ body {
 }
 .layout-dashboard .ant-layout-sider.sider-primary .brand {
   font-weight: 600;
+
+  display: flex;
+  justify-content: center;
 }
+
 .layout-dashboard .ant-layout-sider.sider-primary .brand span {
   vertical-align: middle;
   margin-left: 3px;
@@ -1243,7 +1247,7 @@ img {
 }
 
 .gradent {
-  background: url("../images/info-card-2.jpg") no-repeat center top;
+  background: url('../images/info-card-2.jpg') no-repeat center top;
   background-size: cover;
   padding: 15px;
   border-radius: 15px;
@@ -1795,7 +1799,7 @@ body {
   background-size: cover;
   background-position: 50%;
   text-align: center;
-  background: url("../images/bg-signup.jpg") no-repeat center top;
+  background: url('../images/bg-signup.jpg') no-repeat center top;
 }
 .header-col.header-brand {
   white-space: nowrap;
@@ -2261,7 +2265,7 @@ section.ant-layout.layout-content .ant-layout-content.content-ant {
 }
 
 .card-credit {
-  background-image: url("../images/info-card-3.jpg");
+  background-image: url('../images/info-card-3.jpg');
   background-position: 50%;
   background-size: cover;
   border: none;
@@ -2309,7 +2313,7 @@ section.ant-layout.layout-content .ant-layout-content.content-ant {
   width: 100%;
 }
 .p-20 {
-  padding: "0px 20px 0px 0px";
+  padding: '0px 20px 0px 0px';
 }
 .layout-default .ant-layout-content.p-0 {
   padding: 0px;
