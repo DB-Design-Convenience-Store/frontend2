@@ -5,22 +5,20 @@
     "plugin:prettier/recommended"
   ],
   "plugins": [
-    "prettier",
     "react",
     "react-hooks"
   ],
   "rules": {
     "prettier/prettier": "error",
     "react/prop-types": "off",
-    "react/jsx-key": "off",
-    "indent": ["error", 2]
+    "react/jsx-key": "off"
   },
   "parserOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "module",
     "ecmaFeatures": {
-      "jsx": true
-    }
+      "jsx": true,
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
   },
   "ignorePatterns": [
     "node_modules",
