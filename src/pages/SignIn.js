@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Layout, Menu, Button, Row, Col, Typography, Form, Input, Switch } from 'antd';
-import signinbg from '../assets/images/img-signin.jpg';
+import signinbg from '@assets/images/img-signin.jpg';
 import { DribbbleOutlined, TwitterOutlined, InstagramOutlined, GithubOutlined } from '@ant-design/icons';
 function onChange(checked) {
   console.log(`switch to ${checked}`);

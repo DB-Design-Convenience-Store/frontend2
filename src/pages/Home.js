@@ -2,10 +2,10 @@ import React from 'react';
 import { Card, Col, Row, Typography, Timeline, Radio } from 'antd';
 import Paragraph from 'antd/lib/typography/Paragraph';
 
-import Echart from '../components/chart/EChart';
-import LineChart from '../components/chart/LineChart';
+import Echart from '@components/chart/EChart';
+import LineChart from '@components/chart/LineChart';
 
-import ava1 from '../assets/images/logo-shopify.svg';
+import ava1 from '@assets/images/logo-shopify.svg';
 
 function Home() {
   const { Title, Text } = Typography;

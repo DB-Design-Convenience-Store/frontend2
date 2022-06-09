@@ -1,6 +1,6 @@
 import React from 'react';
 import { Avatar } from 'antd';
-import avtar from '../../../assets/images/team-2.jpg';
+import avtar from '@assets/images/team-2.jpg';
 import { clockicon, wifi, credit } from './icons';
 
 export const data = [

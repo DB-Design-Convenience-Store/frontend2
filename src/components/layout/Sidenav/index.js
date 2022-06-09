@@ -1,7 +1,7 @@
 import React from 'react';
 import { Menu, Button } from 'antd';
 import { NavLink, useLocation } from 'react-router-dom';
-import logo from '../../../assets/images/uos25-2.png';
+import logo from '@assets/images/uos25-2.png';
 import { dashboard, signin, signup } from './icons';
 import { navList } from './dummy';
 
