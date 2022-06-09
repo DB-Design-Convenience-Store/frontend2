@@ -10,55 +10,137 @@ import face6 from '@assets/images/face-6.jpeg';
 
 const { Title } = Typography;
 
+// 사진 6개 돌려쓰기 위함.
+const getRandomFace = () => {
+  const val = Math.random();
+  if (val < 0.16) return face;
+  else if (val < 0.32) return face2;
+  else if (val < 0.48) return face3;
+  else if (val < 0.54) return face4;
+  else if (val < 0.7) return face5;
+  return face6;
+};
+
+// 숫자에 컴마 표시
+function printNumberWithCommas(number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
 // table code start
 const columns = [
+  {
+    title: '직원 번호',
+    dataIndex: 'id',
+    key: 'id',
+  },
   {
     title: '이름',
     dataIndex: 'name',
     key: 'name',
-    width: '32%',
+    render: function (text) {
+      return (
+        <>
+          <Avatar.Group>
+            <Avatar className="shape-avatar" shape="square" size={40} src={getRandomFace()}></Avatar>
+            <div className="avatar-info">
+              <Title level={5}>{text}</Title>
+            </div>
+          </Avatar.Group>{' '}
+        </>
+      );
+    },
   },
   {
-    title: '직책',
-    dataIndex: 'function',
-    key: 'function',
+    title: '역할',
+    dataIndex: 'role',
+    key: 'role',
+    render: function (text) {
+      return (
+        <>
+          <div className="author-info">
+            <Title level={5}>{text}</Title>
+            <p>UOS25</p>
+          </div>
+        </>
+      );
+    },
   },
-
+  // 근무 여부는 구현이 지금 안 되므로 PASS!
   {
     title: '근무여부',
     key: 'status',
     dataIndex: 'status',
   },
   {
-    title: '채용일',
-    key: 'employed',
-    dataIndex: 'employed',
+    title: '주간근무시간',
+    key: 'dayWorkTime',
+    dataIndex: 'dayWorkTime',
+    render: function (text) {
+      return <span>{text}시간</span>;
+    },
+  },
+
+  {
+    title: '야간근무시간',
+    key: 'nightWorkTime',
+    dataIndex: 'nightWorkTime',
+    render: function (text) {
+      return <span>{text}시간</span>;
+    },
+  },
+  {
+    title: '급여',
+    key: 'salary',
+    dataIndex: 'salary',
+    render: function (text) {
+      return <span>{printNumberWithCommas(text)}원</span>;
+    },
+  },
+  {
+    title: '고용일자',
+    key: 'hiredDate',
+    dataIndex: 'hiredDate',
+  },
+
+  {
+    title: '해고일자',
+    key: 'firedDate',
+    dataIndex: 'firedDate',
+  },
+  {
+    title: '급여지급일자',
+    key: 'payDate',
+    dataIndex: 'payDate',
+  },
+  {
+    title: '수정',
+    key: 'editButton',
+    dataIndex: 'editButton',
+    render: function (_, record, index) {
+      console.log(record, index);
+      return (
+        <>
+          <Button type="secondary" className="tag-badge">
+            직원 수정
+          </Button>
+        </>
+      );
+    },
   },
 ];
 
 const data = [
   {
     key: '1',
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar className="shape-avatar" shape="square" size={40} src={face2}></Avatar>
-          <div className="avatar-info">
-            <Title level={5}>김성빈</Title>
-            <p>010-0000-0000</p>
-          </div>
-        </Avatar.Group>{' '}
-      </>
-    ),
-    function: (
-      <>
-        <div className="author-info">
-          <Title level={5}>매니저</Title>
-          <p>UOS25</p>
-        </div>
-      </>
-    ),
-
+    id: 1,
+    name: '김성빈',
+    role: '매니저',
+    dayWorkTime: 4,
+    nightWorkTime: 4,
+    salary: 1080000,
+    hiredDate: '2022-06-09',
+    firedDate: '2022-06-09',
+    payDate: '2022-06-09',
     status: (
       <>
         <Button type="primary" className="tag-primary">
@@ -66,198 +148,102 @@ const data = [
         </Button>
       </>
     ),
-    employed: (
-      <>
-        <div className="ant-employed">
-          <span>23/04/18</span>
-          <a href="#pablo">Edit</a>
-        </div>
-      </>
-    ),
   },
-
   {
     key: '2',
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar className="shape-avatar" shape="square" size={40} src={face3}></Avatar>
-          <div className="avatar-info">
-            <Title level={5}>오우택</Title>
-            <p>010-0000-0000</p>
-          </div>
-        </Avatar.Group>{' '}
-      </>
-    ),
-    function: (
-      <>
-        <div className="author-info">
-          <Title level={5}>알바</Title>
-          <p>UOS25</p>
-        </div>
-      </>
-    ),
-
+    id: 2,
+    name: '오우택',
+    role: '알바',
+    dayWorkTime: 4,
+    nightWorkTime: 4,
+    salary: 1080000,
+    hiredDate: '2022-06-09',
+    firedDate: '2022-06-09',
+    payDate: '2022-06-09',
     status: (
       <>
-        <Button className="tag-badge">근무중</Button>
-      </>
-    ),
-    employed: (
-      <>
-        <div className="ant-employed">
-          <span>23/12/20</span>
-          <a href="#pablo">Edit</a>
-        </div>
+        <Button type="primary" className="tag-primary">
+          근무중
+        </Button>
       </>
     ),
   },
-
   {
     key: '3',
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar className="shape-avatar" shape="square" size={40} src={face}></Avatar>
-          <div className="avatar-info">
-            <Title level={5}>현창호</Title>
-            <p>010-0000-0000</p>
-          </div>
-        </Avatar.Group>{' '}
-      </>
-    ),
-    function: (
-      <>
-        <div className="author-info">
-          <Title level={5}>알바</Title>
-          <p>UOS25</p>
-        </div>
-      </>
-    ),
-
+    id: 3,
+    name: '현창호',
+    role: '매니저',
+    dayWorkTime: 4,
+    nightWorkTime: 4,
+    salary: 1080000,
+    hiredDate: '2022-06-09',
+    firedDate: '2022-06-09',
+    payDate: '2022-06-09',
     status: (
       <>
-        <Button className="tag-badge">근무중</Button>
-      </>
-    ),
-    employed: (
-      <>
-        <div className="ant-employed">
-          <span>03/04/21</span>
-          <a href="#pablo">Edit</a>
-        </div>
+        <Button type="primary" className="tag-primary">
+          근무중
+        </Button>
       </>
     ),
   },
   {
     key: '4',
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar className="shape-avatar" shape="square" size={40} src={face4}></Avatar>
-          <div className="avatar-info">
-            <Title level={5}>조용재</Title>
-            <p>010-0000-0000</p>
-          </div>
-        </Avatar.Group>{' '}
-      </>
-    ),
-    function: (
-      <>
-        <div className="author-info">
-          <Title level={5}>알바</Title>
-          <p>UOS25</p>
-        </div>
-      </>
-    ),
-
+    id: 4,
+    name: '조용재',
+    role: '알바',
+    dayWorkTime: 4,
+    nightWorkTime: 4,
+    salary: 1080000,
+    hiredDate: '2022-06-09',
+    firedDate: '2022-06-09',
+    payDate: '2022-06-09',
     status: (
       <>
-        <Button className="tag-badge">근무중</Button>
-      </>
-    ),
-    employed: (
-      <>
-        <div className="ant-employed">
-          <span>03/04/21</span>
-          <a href="#pablo">Edit</a>
-        </div>
+        <Button type="primary" className="tag-primary">
+          근무중
+        </Button>
       </>
     ),
   },
   {
     key: '5',
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar className="shape-avatar" shape="square" size={40} src={face5}></Avatar>
-          <div className="avatar-info">
-            <Title level={5}>이한솔</Title>
-            <p>010-0000-0000</p>
-          </div>
-        </Avatar.Group>{' '}
-      </>
-    ),
-    function: (
-      <>
-        <div className="author-info">
-          <Title level={5}>알바</Title>
-          <p>UOS25</p>
-        </div>
-      </>
-    ),
+    id: 5,
+    name: '이한솔',
+    role: '알바',
+    dayWorkTime: 4,
+    nightWorkTime: 4,
+    salary: 1080000,
+    hiredDate: '2022-06-09',
+    firedDate: '2022-06-09',
+    payDate: '2022-06-09',
     status: (
       <>
-        <Button className="tag-badge">근무중</Button>
-      </>
-    ),
-    employed: (
-      <>
-        <div className="ant-employed">
-          <span>23/03/20</span>
-          <a href="#pablo">Edit</a>
-        </div>
+        <Button type="primary" className="tag-primary">
+          근무중
+        </Button>
       </>
     ),
   },
-
   {
     key: '6',
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar className="shape-avatar" shape="square" size={40} src={face6}></Avatar>
-          <div className="avatar-info">
-            <Title level={5}>김종현</Title>
-            <p>010-0000-0000</p>
-          </div>
-        </Avatar.Group>{' '}
-      </>
-    ),
-    function: (
-      <>
-        <div className="author-info">
-          <Title level={5}>알바</Title>
-          <p>UOS25</p>
-        </div>
-      </>
-    ),
-
+    id: 6,
+    name: '김종현',
+    role: '알바',
+    dayWorkTime: 4,
+    nightWorkTime: 4,
+    salary: 1080000,
+    hiredDate: '2022-06-09',
+    firedDate: '2022-06-09',
+    payDate: '2022-06-09',
     status: (
       <>
         <Button className="tag-badge">근무중</Button>
-      </>
-    ),
-    employed: (
-      <>
-        <div className="ant-employed">
-          <span>14/04/17</span>
-          <a href="#pablo">Edit</a>
-        </div>
       </>
     ),
   },
 ];
+
 // project table start
 function Tables() {
   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
