@@ -1,5 +1,6 @@
 import React from 'react';
-import { Row, Col, Card, Radio, Table, Button, Avatar, Typography } from 'antd';
+import { Button, Avatar, Typography } from 'antd';
+const { Title } = Typography;
 
 import face from '@assets/images/face-1.jpg';
 import face2 from '@assets/images/face-2.jpg';
@@ -7,8 +8,6 @@ import face3 from '@assets/images/face-3.jpg';
 import face4 from '@assets/images/face-4.jpg';
 import face5 from '@assets/images/face-5.jpeg';
 import face6 from '@assets/images/face-6.jpeg';
-
-const { Title } = Typography;
 
 // 사진 6개 돌려쓰기 위함.
 const getRandomFace = () => {
@@ -27,7 +26,7 @@ function printNumberWithCommas(number) {
 }
 
 // table code start
-const columns = [
+export const columns = [
   {
     title: '직원 번호',
     dataIndex: 'id',
@@ -137,119 +136,3 @@ const columns = [
     },
   },
 ];
-
-const data = [
-  {
-    key: '1',
-    id: 1,
-    name: '김성빈',
-    role: '매니저',
-    dayWorkTime: 4,
-    nightWorkTime: 4,
-    salary: 1080000,
-    hiredDate: '2022-06-09',
-    firedDate: '2022-06-09',
-    payDate: '2022-06-09',
-    status: '근무중',
-  },
-  {
-    key: '2',
-    id: 2,
-    name: '오우택',
-    role: '알바',
-    dayWorkTime: 4,
-    nightWorkTime: 4,
-    salary: 1080000,
-    hiredDate: '2022-06-09',
-    firedDate: '2022-06-09',
-    payDate: '2022-06-09',
-    status: '근무중',
-  },
-  {
-    key: '3',
-    id: 3,
-    name: '현창호',
-    role: '매니저',
-    dayWorkTime: 4,
-    nightWorkTime: 4,
-    salary: 1080000,
-    hiredDate: '2022-06-09',
-    firedDate: '2022-06-09',
-    payDate: '2022-06-09',
-    status: '근무중',
-  },
-  {
-    key: '4',
-    id: 4,
-    name: '조용재',
-    role: '알바',
-    dayWorkTime: 4,
-    nightWorkTime: 4,
-    salary: 1080000,
-    hiredDate: '2022-06-09',
-    firedDate: '2022-06-09',
-    payDate: '2022-06-09',
-    status: '준비중',
-  },
-  {
-    key: '5',
-    id: 5,
-    name: '이한솔',
-    role: '알바',
-    dayWorkTime: 4,
-    nightWorkTime: 4,
-    salary: 1080000,
-    hiredDate: '2022-06-09',
-    firedDate: '2022-06-09',
-    payDate: '2022-06-09',
-    status: '휴식중',
-  },
-  {
-    key: '6',
-    id: 6,
-    name: '김종현',
-    role: '알바',
-    dayWorkTime: 4,
-    nightWorkTime: 4,
-    salary: 1080000,
-    hiredDate: '2022-06-09',
-    firedDate: '2022-06-09',
-    payDate: '2022-06-09',
-    status: '휴식중',
-  },
-];
-
-// project table start
-function Tables() {
-  const onChange = (e) => console.log(`radio checked:${e.target.value}`);
-
-  return (
-    <>
-      <div className="tabled">
-        <Row gutter={[24, 0]}>
-          <Col xs="24" xl={24}>
-            <Card
-              bordered={false}
-              className="criclebox tablespace mb-24"
-              title="직원 목록"
-              extra={
-                <>
-                  <Radio.Group onChange={onChange} defaultValue="a">
-                    <Radio.Button value="a">전원</Radio.Button>
-                    <Radio.Button value="b">근무중</Radio.Button>
-                  </Radio.Group>
-                </>
-              }
-            >
-              <div className="table-responsive">
-                <Table columns={columns} dataSource={data} pagination={false} className="ant-border-space" />
-              </div>
-            </Card>
-          </Col>
-        </Row>
-      </div>
-    </>
-  );
-}
-
-export default Tables;
