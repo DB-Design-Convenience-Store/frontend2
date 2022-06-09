@@ -70,6 +70,15 @@ const columns = [
     title: '근무여부',
     key: 'status',
     dataIndex: 'status',
+    render: function (text) {
+      return (
+        <>
+          <Button type={text === '근무중' ? 'primary' : ''} className={text === '근무중' ? 'tag-primary' : 'tag-badge'}>
+            {text}
+          </Button>
+        </>
+      );
+    },
   },
   {
     title: '주간근무시간',
@@ -141,13 +150,7 @@ const data = [
     hiredDate: '2022-06-09',
     firedDate: '2022-06-09',
     payDate: '2022-06-09',
-    status: (
-      <>
-        <Button type="primary" className="tag-primary">
-          근무중
-        </Button>
-      </>
-    ),
+    status: '근무중',
   },
   {
     key: '2',
@@ -160,13 +163,7 @@ const data = [
     hiredDate: '2022-06-09',
     firedDate: '2022-06-09',
     payDate: '2022-06-09',
-    status: (
-      <>
-        <Button type="primary" className="tag-primary">
-          근무중
-        </Button>
-      </>
-    ),
+    status: '근무중',
   },
   {
     key: '3',
@@ -179,13 +176,7 @@ const data = [
     hiredDate: '2022-06-09',
     firedDate: '2022-06-09',
     payDate: '2022-06-09',
-    status: (
-      <>
-        <Button type="primary" className="tag-primary">
-          근무중
-        </Button>
-      </>
-    ),
+    status: '근무중',
   },
   {
     key: '4',
@@ -198,13 +189,7 @@ const data = [
     hiredDate: '2022-06-09',
     firedDate: '2022-06-09',
     payDate: '2022-06-09',
-    status: (
-      <>
-        <Button type="primary" className="tag-primary">
-          근무중
-        </Button>
-      </>
-    ),
+    status: '준비중',
   },
   {
     key: '5',
@@ -217,13 +202,7 @@ const data = [
     hiredDate: '2022-06-09',
     firedDate: '2022-06-09',
     payDate: '2022-06-09',
-    status: (
-      <>
-        <Button type="primary" className="tag-primary">
-          근무중
-        </Button>
-      </>
-    ),
+    status: '휴식중',
   },
   {
     key: '6',
@@ -236,11 +215,7 @@ const data = [
     hiredDate: '2022-06-09',
     firedDate: '2022-06-09',
     payDate: '2022-06-09',
-    status: (
-      <>
-        <Button className="tag-badge">근무중</Button>
-      </>
-    ),
+    status: '휴식중',
   },
 ];
 
@@ -256,11 +231,11 @@ function Tables() {
             <Card
               bordered={false}
               className="criclebox tablespace mb-24"
-              title="직원 관리"
+              title="직원 목록"
               extra={
                 <>
                   <Radio.Group onChange={onChange} defaultValue="a">
-                    <Radio.Button value="a">All</Radio.Button>
+                    <Radio.Button value="a">전원</Radio.Button>
                     <Radio.Button value="b">근무중</Radio.Button>
                   </Radio.Group>
                 </>

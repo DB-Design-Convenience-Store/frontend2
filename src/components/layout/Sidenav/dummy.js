@@ -23,7 +23,7 @@ export const navList = [
   },
   {
     header: false,
-    link: '/tables_workers',
+    link: '/workers',
     icon: profile,
     name: '직원 관리',
   },
