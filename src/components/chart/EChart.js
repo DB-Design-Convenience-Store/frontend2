@@ -8,20 +8,20 @@ function EChart() {
 
   const items = [
     {
-      Title: '3,6K',
-      user: 'Users',
+      value: '300,000',
+      title: '방문자수',
     },
     {
-      Title: '2m',
-      user: 'Clicks',
+      value: '300,000',
+      title: '결제수',
     },
     {
-      Title: '$772',
-      user: 'Sales',
+      value: '900,000',
+      title: '입고물품수',
     },
     {
-      Title: '82',
-      user: 'Items',
+      value: '700,000',
+      title: '판매물품수',
     },
   ];
 
@@ -39,8 +39,8 @@ function EChart() {
           {items.map((v, index) => (
             <Col xs={6} xl={6} sm={6} md={6} key={index}>
               <div className="chart-visitor-count">
-                <Title level={4}>{v.Title}</Title>
-                <span>{v.user}</span>
+                <Title level={4}>{v.value}</Title>
+                <span>{v.title}</span>
               </div>
             </Col>
           ))}
