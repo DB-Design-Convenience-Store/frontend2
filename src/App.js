@@ -6,6 +6,7 @@ import Billing from './pages/Billing';
 import EmployeeManagePage from './pages/EmployeeManagePage';
 import FundManagePage from './pages/FundManagePage';
 import LostStockManagePage from './pages/LostStockManagePage';
+import TransactionManagePage from './pages/TransactionManagePage';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import Main from '@components/layout/Main';
@@ -26,6 +27,7 @@ function App() {
           <Route exact path="/employees" component={EmployeeManagePage} />
           <Route exact path="/funds" component={FundManagePage} />
           <Route exact path="/loststocks" component={LostStockManagePage} />
+          <Route exact path="/transactions" component={TransactionManagePage} />
           <Redirect from="*" to="/dashboard" />
         </Main>
       </Switch>

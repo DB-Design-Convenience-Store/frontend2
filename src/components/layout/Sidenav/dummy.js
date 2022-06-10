@@ -39,4 +39,10 @@ export const navList = [
     icon: tables,
     name: '재고 손실 관리',
   },
+  {
+    header: false,
+    link: '/transactions',
+    icon: tables,
+    name: '거래 관리',
+  },
 ];
