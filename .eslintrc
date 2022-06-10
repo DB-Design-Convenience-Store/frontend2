@@ -9,7 +9,7 @@
     "react-hooks"
   ],
   "rules": {
-    "prettier/prettier": "error",
+    "prettier/prettier": ["error", { "endOfLine": "auto" }] ,
     "react/prop-types": "off",
     "react/jsx-key": "off"
   },

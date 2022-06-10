@@ -13,25 +13,29 @@ import Main from '@components/layout/Main';
 import 'antd/dist/antd.css';
 import './assets/styles/main.css';
 import './assets/styles/responsive.css';
+import { client } from './apollo';
+import { ApolloProvider } from '@apollo/client';
 
 function App() {
   return (
-    <div className="App">
-      <Switch>
-        <Route path="/sign-up" exact component={SignUp} />
-        <Route path="/sign-in" exact component={SignIn} />
-        <Main>
-          <Route exact path="/dashboard" component={Home} />
-          <Route exact path="/tables" component={Tables} />
-          <Route exact path="/billing" component={Billing} />
-          <Route exact path="/employees" component={EmployeeManagePage} />
-          <Route exact path="/funds" component={FundManagePage} />
-          <Route exact path="/loststocks" component={LostStockManagePage} />
-          <Route exact path="/transactions" component={TransactionManagePage} />
-          <Redirect from="*" to="/dashboard" />
-        </Main>
-      </Switch>
-    </div>
+    <ApolloProvider client={client}>
+      <div className="App">
+        <Switch>
+          <Route path="/sign-up" exact component={SignUp} />
+          <Route path="/sign-in" exact component={SignIn} />
+          <Main>
+            <Route exact path="/dashboard" component={Home} />
+            <Route exact path="/tables" component={Tables} />
+            <Route exact path="/billing" component={Billing} />
+            <Route exact path="/employees" component={EmployeeManagePage} />
+            <Route exact path="/funds" component={FundManagePage} />
+            <Route exact path="/loststocks" component={LostStockManagePage} />
+            <Route exact path="/transactions" component={TransactionManagePage} />
+            <Redirect from="*" to="/dashboard" />
+          </Main>
+        </Switch>
+      </div>
+    </ApolloProvider>
   );
 }
 
