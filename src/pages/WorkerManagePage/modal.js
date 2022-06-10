@@ -9,7 +9,7 @@ const WorkerAddOrChangeModal = () => {
     setIsModalVisible(true);
   };
 
-  const handleOk = () => {
+  const handleClose = () => {
     setIsModalVisible(false);
   };
 
@@ -26,11 +26,13 @@ const WorkerAddOrChangeModal = () => {
       <Modal
         title={MODAL_TITLE}
         visible={isModalVisible}
-        onOk={handleOk}
+        onOk={handleClose}
+        onCancel={handleClose}
+        maskClosable={false}
         bodyStyle={{ overflowY: 'auto', maxHeight: 'calc(100vh - 300px)' }}
         footer={null}
       >
-        <AddOrChangeManagerForm onClose={handleOk} />
+        <AddOrChangeManagerForm onClose={handleClose} />
       </Modal>
     </>
   );
