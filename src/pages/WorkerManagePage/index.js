@@ -3,6 +3,7 @@ import { data } from './data';
 import { columns } from './columns';
 
 import { Row, Col, Card, Radio, Table } from 'antd';
+import WorkerAddOrChangeModal from './modal';
 
 /*
   직원번호
@@ -40,6 +41,12 @@ function Tables() {
                 <Table columns={columns} dataSource={data} pagination={false} className="ant-border-space" />
               </div>
             </Card>
+          </Col>
+        </Row>
+        {/* 아래의 Row, Col 의 배치 방식은 아직 잘 모르겠다. */}
+        <Row gutter={[24, 0]}>
+          <Col span={6} offset={22}>
+            <WorkerAddOrChangeModal />
           </Col>
         </Row>
       </div>

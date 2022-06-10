@@ -128,9 +128,7 @@ export const columns = [
       console.log(record, index);
       return (
         <>
-          <Button type="secondary" className="tag-badge">
-            직원 수정
-          </Button>
+          <Button type="danger">직원 수정</Button>
         </>
       );
     },

@@ -1773,6 +1773,13 @@ body {
   height: 40px;
   border: 1px solid #d9d9d9;
 }
+
+/* Form 관련해서 Input 정상화 */
+.ant-form-item-control-input > .ant-form-item-control-input-content > .ant-input {
+  color: rgba(0, 0, 0, 0.85) !important;
+  font-weight: normal !important;
+}
+
 .font-bold {
   font-weight: 700;
 }
