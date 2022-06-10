@@ -27,4 +27,10 @@ export const navList = [
     icon: profile,
     name: '직원 관리',
   },
+  {
+    header: false,
+    link: '/funds',
+    icon: profile,
+    name: '자금 관리',
+  },
 ];
