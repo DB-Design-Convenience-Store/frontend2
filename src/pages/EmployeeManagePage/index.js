@@ -3,7 +3,7 @@ import { data } from './data';
 import { getColumns } from './columns';
 
 import { Row, Col, Card, Radio, Table, Button } from 'antd';
-import WorkerAddOrChangeModal from './modal';
+import EmployeeAddOrChangeModal from './modal';
 
 /*
   직원번호
@@ -16,7 +16,7 @@ import WorkerAddOrChangeModal from './modal';
   해고일자 firedDate
   급여지급일자 payDate
 */
-function Tables() {
+function EmployeeManagePage() {
   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -72,7 +72,7 @@ function Tables() {
             <Button type="primary" onClick={showModal}>
               직원 등록
             </Button>
-            <WorkerAddOrChangeModal isModalVisible={isModalVisible} handleClose={handleClose} values={values} />
+            <EmployeeAddOrChangeModal isModalVisible={isModalVisible} handleClose={handleClose} values={values} />
           </Col>
         </Row>
       </div>
@@ -80,4 +80,4 @@ function Tables() {
   );
 }
 
-export default Tables;
+export default EmployeeManagePage;

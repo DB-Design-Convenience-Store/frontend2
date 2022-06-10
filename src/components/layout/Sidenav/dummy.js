@@ -23,14 +23,14 @@ export const navList = [
   },
   {
     header: false,
-    link: '/workers',
+    link: '/employees',
     icon: profile,
     name: '직원 관리',
   },
   {
     header: false,
     link: '/funds',
-    icon: profile,
+    icon: tables,
     name: '자금 관리',
   },
 ];

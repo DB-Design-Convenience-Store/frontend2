@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './pages/Home';
 import Tables from './pages/Tables';
 import Billing from './pages/Billing';
-import WorkerManagePage from './pages/WorkerManagePage';
+import EmployeeManagePage from './pages/EmployeeManagePage';
 import FundManagePage from './pages/FundManagePage';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
@@ -22,7 +22,7 @@ function App() {
           <Route exact path="/dashboard" component={Home} />
           <Route exact path="/tables" component={Tables} />
           <Route exact path="/billing" component={Billing} />
-          <Route exact path="/workers" component={WorkerManagePage} />
+          <Route exact path="/employees" component={EmployeeManagePage} />
           <Route exact path="/funds" component={FundManagePage} />
           <Redirect from="*" to="/dashboard" />
         </Main>

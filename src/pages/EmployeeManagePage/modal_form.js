@@ -23,7 +23,7 @@ const formItemLayout = {
   },
 };
 
-const AddOrChangeManagerForm = ({ onClose, values }) => {
+const EmployeeAddOrChangeForm = ({ onClose, values }) => {
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -178,4 +178,4 @@ const AddOrChangeManagerForm = ({ onClose, values }) => {
   );
 };
 
-export default AddOrChangeManagerForm;
+export default EmployeeAddOrChangeForm;
