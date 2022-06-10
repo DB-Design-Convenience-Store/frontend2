@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { data } from './data';
-import { columns } from './columns';
+import { getColumns } from './columns';
 
-import { Row, Col, Card, Radio, Table } from 'antd';
+import { Row, Col, Card, Radio, Table, Button } from 'antd';
 import WorkerAddOrChangeModal from './modal';
 
 /*
@@ -18,6 +18,24 @@ import WorkerAddOrChangeModal from './modal';
 */
 function Tables() {
   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const [values, setValues] = useState({});
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleClose = () => {
+    setIsModalVisible(false);
+  };
+
+  const triggerModalOpen = (record) => {
+    console.log('onEdit: ', record);
+    setValues(record);
+    showModal();
+  };
 
   return (
     <>
@@ -38,7 +56,12 @@ function Tables() {
               }
             >
               <div className="table-responsive">
-                <Table columns={columns} dataSource={data} pagination={false} className="ant-border-space" />
+                <Table
+                  columns={getColumns(triggerModalOpen)}
+                  dataSource={data}
+                  pagination={false}
+                  className="ant-border-space"
+                />
               </div>
             </Card>
           </Col>
@@ -46,7 +69,10 @@ function Tables() {
         {/* 아래의 Row, Col 의 배치 방식은 아직 잘 모르겠다. */}
         <Row gutter={[24, 0]}>
           <Col span={6} offset={22}>
-            <WorkerAddOrChangeModal />
+            <Button type="primary" onClick={showModal}>
+              직원 등록
+            </Button>
+            <WorkerAddOrChangeModal isModalVisible={isModalVisible} handleClose={handleClose} values={values} />
           </Col>
         </Row>
       </div>

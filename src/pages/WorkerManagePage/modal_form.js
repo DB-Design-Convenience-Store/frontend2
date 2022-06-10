@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import moment from 'moment';
 import { Button, DatePicker, Form, Input, InputNumber, message, Select } from 'antd';
 
 const { Option } = Select;
@@ -22,8 +23,18 @@ const formItemLayout = {
   },
 };
 
-const AddOrChangeManagerForm = ({ onClose }) => {
+const AddOrChangeManagerForm = ({ onClose, values }) => {
   const [form] = Form.useForm();
+
+  useEffect(() => {
+    form.setFieldsValue({
+      ...values,
+      // date picker는 moment를 써줘야 함 (antd)
+      hiredDate: !values.hiredDate ? '' : moment(values.hiredDate),
+      firedDate: !values.firedDate ? '' : moment(values.firedDate),
+      payDate: !values.payDate ? '' : moment(values.payDate),
+    });
+  }, [values]);
 
   /* eslint-disable */
   const onFinish = (values) => {

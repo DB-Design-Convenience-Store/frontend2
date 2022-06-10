@@ -26,7 +26,7 @@ function printNumberWithCommas(number) {
 }
 
 // table code start
-export const columns = [
+export const getColumns = (triggerModalOpen) => [
   {
     title: '직원 번호',
     dataIndex: 'id',
@@ -124,11 +124,13 @@ export const columns = [
     title: '수정',
     key: 'editButton',
     dataIndex: 'editButton',
-    render: function (_, record, index) {
-      console.log(record, index);
+    render: function (_, record) {
+      console.log(record);
       return (
         <>
-          <Button type="danger">직원 수정</Button>
+          <Button type="danger" onClick={() => triggerModalOpen(record)}>
+            직원 수정
+          </Button>
         </>
       );
     },
