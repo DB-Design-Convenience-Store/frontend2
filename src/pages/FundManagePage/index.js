@@ -38,9 +38,9 @@ function FundManagePage() {
               extra={
                 <>
                   <Radio.Group onChange={onChange} defaultValue="a">
-                    <Radio.Button value="a">전체</Radio.Button>
-                    <Radio.Button value="b">수입</Radio.Button>
-                    <Radio.Button value="b">지출</Radio.Button>
+                    <Radio.Button value="all">전체</Radio.Button>
+                    <Radio.Button value="true">수입</Radio.Button>
+                    <Radio.Button value="false">지출</Radio.Button>
                   </Radio.Group>
                 </>
               }
