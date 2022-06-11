@@ -13,7 +13,7 @@ export const navList = [
   },
   {
     header: false,
-    link: '/tables',
+    link: '/stock',
     icon: tables,
     name: '재고 관리',
   },
@@ -44,5 +44,11 @@ export const navList = [
     link: '/transactions',
     icon: tables,
     name: '거래 관리',
+  },
+  {
+    header: false,
+    link: '/orders',
+    icon: tables,
+    name: '발주 관리',
   },
 ];
