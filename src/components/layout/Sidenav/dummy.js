@@ -45,4 +45,10 @@ export const navList = [
     icon: tables,
     name: '거래 관리',
   },
+  {
+    header: false,
+    link: '/orders',
+    icon: tables,
+    name: '발주 관리',
+  },
 ];
