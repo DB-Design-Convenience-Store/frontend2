@@ -13,7 +13,7 @@ export const navList = [
   },
   {
     header: false,
-    link: '/tables',
+    link: '/stock',
     icon: tables,
     name: '재고 관리',
   },
