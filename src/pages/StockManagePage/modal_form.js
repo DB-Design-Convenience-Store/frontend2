@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
-import moment from 'moment';
-import { Button, Form, InputNumber, message } from 'antd';
+import { Button, Form, InputNumber, Input, message } from 'antd';
 
 const formItemLayout = {
   labelCol: {
@@ -31,43 +30,45 @@ const NEW_STOCK = gql`
     }
   }
 `;
+
 const StockAddOrChangeForm = ({ onClose, values }) => {
   const [form] = Form.useForm();
-  const [createStock, newStock] = useMutation(NEW_STOCK);
-  if (newStock.loading) {
-    console.log('loading');
-  }
+  const [createStock, { loading, error }] = useMutation(NEW_STOCK, {
+    onCompleted: () => {
+      message.success('등록 성공');
+    },
+    onError: (error) => {
+      message.error(error);
+    },
+  });
 
   useEffect(() => {
     form.setFieldsValue({
       ...values,
-
-      isRefund: values.isRefund ? 'true' : 'false',
-
-      // date picker는 moment를 써줘야 함 (antd)
-      createdAt: !values.createdAt ? '' : moment(values.createdAt),
     });
   }, [values]);
 
   /* eslint-disable */
   const onFinish = (values) => {
-    createStock({
-		variables: { newStock: values },
-	});
-    message.success("등록에 성공하였습니다: " + JSON.stringify(values));
-    form.resetFields();
-    onClose();
+		console.log(values)
+    createStock({ variables: { "newStock": values } });
+    //form.resetFields();
+    //onClose();
   };
 
   const onFinishFailed = (values) => {
     console.log(JSON.stringify(values));
     message.error("등록에 실패하였습니다: " + JSON.stringify(values));
+    onClose();
   }
 
+	if (loading) return 'submitting...';
+  if (error) return error.message;
+
   return (
-    <Form {...formItemLayout} form={form} name="worker" onFinish={onFinish} onFinishFailed={onFinishFailed} size="large" scrollToFirstError>
+    <Form {...formItemLayout} form={form} name="stock" onFinish={onFinish} onFinishFailed={onFinishFailed} size="large" scrollToFirstError>
       <Form.Item
-        name="id"
+        name="productId"
         label="물품 번호"
         rules={[
           {
@@ -76,27 +77,42 @@ const StockAddOrChangeForm = ({ onClose, values }) => {
           },
         ]}
       >
-      <InputNumber
-        style={{
-          width: '100%',
-        }}
-      />
+        <InputNumber
+          style={{
+            width: '100%',
+          }}
+        />
       </Form.Item>
 
-      <Form.Item
-        name="name"
-        label="물품 이름"
+      {/*<Form.Item
+        name="location"
+        label="위치"
       >
-      <InputNumber
-        style={{
-          width: '100%',
-        }}
-      />
+        <Radio.Group defaultValue="Warehouse">
+          <Radio value="Warehouse">창고</Radio>
+          <Radio value="Stand">매대</Radio>
+        </Radio.Group>
+      </Form.Item>*/}
+			<Form.Item
+        name="location"
+        label="위치"
+        rules={[
+          {
+            required: true,
+            message: '위치는 필수값입니다.',
+          },
+        ]}
+      >
+        <Input
+          style={{
+            width: '100%',
+          }}
+        />
       </Form.Item>
 
       <Form.Item
-        name="stand"
-        label="매대 개수"
+        name="amount"
+        label="개수"
         rules={[
           {
             required: true,
@@ -104,28 +120,11 @@ const StockAddOrChangeForm = ({ onClose, values }) => {
           },
         ]}
       >
-      <InputNumber
-        style={{
-          width: '100%',
-        }}
-      />
-      </Form.Item>
-
-	  <Form.Item
-        name="warehouse"
-        label="창고 개수"
-        rules={[
-          {
-            required: true,
-            message: '개수는 필수값입니다.',
-          },
-        ]}
-      >
-      <InputNumber
-        style={{
-          width: '100%',
-        }}
-      />
+        <InputNumber
+          style={{
+            width: '100%',
+          }}
+        />
       </Form.Item>
 
       <Form.Item>

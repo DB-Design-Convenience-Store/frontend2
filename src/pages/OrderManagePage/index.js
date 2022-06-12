@@ -1,11 +1,47 @@
-import React, { useState } from 'react';
-import { data } from './data';
+import React, { useState, useEffect } from 'react';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/client';
 import { getColumns } from './columns';
 
 import { Row, Col, Card, Radio, Table, Button } from 'antd';
 import OrderAddOrChangeModal from './modal';
 
+const ALL_ORDERS = gql`
+  query {
+    getOrders {
+      ok
+      orders {
+        id
+        createdAt
+        updatedAt
+        price
+        product {
+          id
+          name
+        }
+        amount
+      }
+    }
+  }
+`;
+
 function OrderManagePage() {
+  const { loading, data } = useQuery(ALL_ORDERS);
+  const [orders, setOrders] = useState([]);
+  useEffect(() => {
+    if (!loading) {
+      setOrders(
+        data.getOrders.orders.map((content) => ({
+          id: content.id,
+          product_id: content.product.id,
+          product_name: content.product.name,
+          price: content.price,
+          amount: content.amount,
+          date: content.createdAt,
+        })),
+      );
+    }
+  }, [loading]);
   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -43,12 +79,14 @@ function OrderManagePage() {
               }
             >
               <div className="table-responsive">
-                <Table
-                  columns={getColumns(triggerModalOpen)}
-                  dataSource={data}
-                  pagination={false}
-                  className="ant-border-space"
-                />
+                {!loading && (
+                  <Table
+                    columns={getColumns(triggerModalOpen)}
+                    dataSource={orders}
+                    pagination={false}
+                    className="ant-border-space"
+                  />
+                )}
               </div>
             </Card>
           </Col>

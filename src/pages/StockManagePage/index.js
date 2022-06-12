@@ -51,7 +51,7 @@ function StockManagePage() {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const [values, setValues] = useState({});
+  const [values, setValues] = useState({ productId: '', location: 'Warehouse', amount: 0 });
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -59,11 +59,7 @@ function StockManagePage() {
 
   const handleClose = () => {
     setIsModalVisible(false);
-  };
-
-  const triggerModalOpen = (record) => {
-    setValues(record);
-    showModal();
+    setValues({ productId: '', location: 'Warehouse', amount: 0 });
   };
 
   return (
@@ -85,12 +81,7 @@ function StockManagePage() {
             >
               <div className="table-responsive">
                 {!loading && (
-                  <Table
-                    columns={getColumns(triggerModalOpen)}
-                    dataSource={stocks}
-                    pagination={false}
-                    className="ant-border-space"
-                  />
+                  <Table columns={getColumns()} dataSource={stocks} pagination={false} className="ant-border-space" />
                 )}
               </div>
             </Card>
