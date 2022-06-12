@@ -1,11 +1,27 @@
 import React, { useState } from 'react';
-import { data } from './data';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/client';
 import { getColumns } from './columns';
 
 import { Row, Col, Card, Radio, Table, Button } from 'antd';
 import StockAddOrChangeModal from './modal';
 
+const ALL_STOCKS = gql`
+  query getStocks {
+    ok
+    stocks {
+      id
+      createdAt
+      updatedAt
+      location
+      amount
+      productId
+    }
+  }
+`;
+
 function StockManagePage() {
+  const stocks = useQuery(ALL_STOCKS);
   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -45,7 +61,7 @@ function StockManagePage() {
               <div className="table-responsive">
                 <Table
                   columns={getColumns(triggerModalOpen)}
-                  dataSource={data}
+                  dataSource={stocks}
                   pagination={false}
                   className="ant-border-space"
                 />

@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/client';
 import moment from 'moment';
 import { Button, Form, InputNumber, message } from 'antd';
 
@@ -21,8 +23,25 @@ const formItemLayout = {
   },
 };
 
+const NEW_STOCK = gql`
+  mutation {
+    createStock($newStock: NewStockInput!) {
+	  stock(input: $newStock) {
+		location
+		amount
+		productId
+	  }
+	{
+      ok
+    }
+  }
+`;
 const StockAddOrChangeForm = ({ onClose, values }) => {
   const [form] = Form.useForm();
+  const [createStock, newStock] = useMutation(NEW_STOCK);
+  if (newStock.loading) {
+    console.log('loading');
+  }
 
   useEffect(() => {
     form.setFieldsValue({
@@ -37,7 +56,9 @@ const StockAddOrChangeForm = ({ onClose, values }) => {
 
   /* eslint-disable */
   const onFinish = (values) => {
-    console.log(JSON.stringify(values));
+    createStock({
+		variables: { newStock: values },
+	});
     message.success("등록에 성공하였습니다: " + JSON.stringify(values));
     form.resetFields();
     onClose();
