@@ -51,4 +51,16 @@ export const navList = [
     icon: tables,
     name: '발주 관리',
   },
+  {
+    header: false,
+    link: '/returns',
+    icon: tables,
+    name: '반품 관리',
+  },
+  {
+    header: false,
+    link: '/receiving',
+    icon: tables,
+    name: '입고 관리',
+  },
 ];
