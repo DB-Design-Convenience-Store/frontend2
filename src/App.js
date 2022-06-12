@@ -8,6 +8,8 @@ import FundManagePage from './pages/FundManagePage';
 import LostStockManagePage from './pages/LostStockManagePage';
 import TransactionManagePage from './pages/TransactionManagePage';
 import OrderManagePage from './pages/OrderManagePage';
+import ReturnManagePage from './pages/ReturnManagePage';
+import ReceivingManagePage from './pages/ReceivingManagePage';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import Main from '@components/layout/Main';
@@ -33,6 +35,8 @@ function App() {
             <Route exact path="/loststocks" component={LostStockManagePage} />
             <Route exact path="/transactions" component={TransactionManagePage} />
             <Route exact path="/orders" component={OrderManagePage} />
+            <Route exact path="/returns" component={ReturnManagePage} />
+            <Route exact path="/receiving" component={ReceivingManagePage} />
             <Redirect from="*" to="/dashboard" />
           </Main>
         </Switch>
