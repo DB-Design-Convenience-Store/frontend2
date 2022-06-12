@@ -24,15 +24,10 @@ const formItemLayout = {
 };
 
 const NEW_STOCK = gql`
-  mutation {
-    createStock($newStock: NewStockInput!) {
-	  stock(input: $newStock) {
-		location
-		amount
-		productId
-	  }
-	{
+  mutation createStock($newStock: CreateStockInput!) {
+    createStock(input: $newStock) {
       ok
+      error
     }
   }
 `;

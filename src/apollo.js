@@ -17,7 +17,9 @@ export const logUserOut = () => {
 
 //backend port주소 넣어서 해줘야됩니다.
 const httpLink = createHttpLink({
-  uri: process.env.REACT_APP_BACKEND ? process.env.REACT_APP_BACKEND : 'http://localhost:5000/graphql',
+  uri: process.env.REACT_APP_BACKEND
+    ? process.env.REACT_APP_BACKEND
+    : 'https://tender-pandas-work-210-179-213-187.loca.lt/graphql',
 });
 
 //토큰은 header의 x-jwt 에 들어갑니다.
