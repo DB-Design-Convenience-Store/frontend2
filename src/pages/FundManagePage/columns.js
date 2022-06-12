@@ -45,7 +45,6 @@ export const getColumns = (triggerModalOpen) => [
     key: 'editButton',
     dataIndex: 'editButton',
     render: function (_, record) {
-      console.log(record);
       return (
         <>
           <Button type="danger" onClick={() => triggerModalOpen(record)}>

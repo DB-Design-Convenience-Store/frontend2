@@ -37,7 +37,7 @@ function OrderManagePage() {
           product_name: content.product.name,
           price: content.price,
           amount: content.amount,
-          date: content.createdAt,
+          date: content.createdAt.toString().slice(0, 10),
         })),
       );
     }

@@ -36,7 +36,7 @@ function ReturnManagePage() {
           product_id: content.product.id,
           product_name: content.product.name,
           amount: content.amount,
-          date: content.createdAt,
+          date: content.createdAt.toString().slice(0, 10),
         })),
       );
     }
