@@ -14,8 +14,13 @@ export const getColumns = (triggerModalOpen) => [
   },
   {
     title: '물품 번호',
-    dataIndex: 'product',
-    key: 'product',
+    dataIndex: 'product_id',
+    key: 'product_id',
+  },
+  {
+    title: '물품 이름',
+    dataIndex: 'product_name',
+    key: 'product_name',
   },
   {
     title: '개수',
@@ -37,7 +42,6 @@ export const getColumns = (triggerModalOpen) => [
     key: 'editButton',
     dataIndex: 'editButton',
     render: function (_, record) {
-      console.log(record);
       return (
         <>
           <Button type="danger" onClick={() => triggerModalOpen(record)}>
