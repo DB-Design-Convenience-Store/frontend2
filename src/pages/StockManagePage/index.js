@@ -31,6 +31,8 @@ function StockManagePage() {
     warehouse: 0,
     stand: 0,
     ...item,
+    id: item.product.id,
+    name: item.product.name,
   }));
 
   return (

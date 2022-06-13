@@ -10,7 +10,10 @@ export const ALL_STOCKS = gql`
         updatedAt
         location
         amount
-        productId
+        product {
+          id
+          name
+        }
       }
     }
   }
