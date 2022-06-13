@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import moment from 'moment';
-import { Button, Form, InputNumber, message, Select } from 'antd';
+import { Button, Checkbox, Form, InputNumber, message, Select } from 'antd';
+import { useMutation } from '@apollo/client';
+import { NEW_TX } from './graphql';
 
 const { Option } = Select;
 
@@ -25,52 +26,57 @@ const formItemLayout = {
 
 const TransactionAddOrChangeForm = ({ onClose, values }) => {
   const [form] = Form.useForm();
+  const [createTransaction, { loading }] = useMutation(NEW_TX);
 
   useEffect(() => {
     form.setFieldsValue({
       ...values,
-
       isRefund: values.isRefund ? 'true' : 'false',
-
-      // date picker는 moment를 써줘야 함 (antd)
-      createdAt: !values.createdAt ? '' : moment(values.createdAt),
     });
   }, [values]);
 
-  /* eslint-disable */
   const onFinish = (values) => {
-    console.log(JSON.stringify(values));
-    message.success("등록에 성공하였습니다: " + JSON.stringify(values));
-    form.resetFields();
-    onClose();
+    console.log('onFinish:', values);
+    const newTransaction = {
+      transactionProducts: {
+        amount: values.amount,
+        productId: values.productId,
+      },
+      paymentType: values.paymentType,
+      customerId: values.customerId,
+      isRefund: values.isRefund === 'checked' ? true : false,
+    };
+    createTransaction({ variables: { newTransaction } }).then((result) => {
+      const { ok, error } = result.data.createTransaction;
+      if (ok) {
+        message.success('등록에 성공했습니다.');
+        form.resetFields();
+        onClose();
+      } else {
+        message.error('등록에 실패하였습니다: ' + error);
+      }
+    });
   };
 
   const onFinishFailed = (values) => {
-    console.log(JSON.stringify(values));
-    message.error("등록에 실패하였습니다: " + JSON.stringify(values));
-  }
+    console.log('onFinishFailed:', JSON.stringify(values));
+    message.error('잘못된 입력입니다: ' + JSON.stringify(values));
+  };
+
+  if (loading) return <span>로딩 중입니다...</span>;
 
   return (
-    <Form {...formItemLayout} form={form} name="worker" onFinish={onFinish} onFinishFailed={onFinishFailed} size="large" scrollToFirstError>
+    <Form
+      {...formItemLayout}
+      form={form}
+      name="worker"
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+      size="large"
+      scrollToFirstError
+    >
       <Form.Item
-        name="id"
-        label="거래 번호"
-        rules={[
-          {
-            required: true,
-            message: '거래 번호는 필수값입니다.',
-          },
-        ]}
-      >
-      <InputNumber
-        style={{
-          width: '100%',
-        }}
-      />
-      </Form.Item>
-
-      <Form.Item
-        name="product"
+        name="productId"
         label="물품 번호"
         rules={[
           {
@@ -79,15 +85,32 @@ const TransactionAddOrChangeForm = ({ onClose, values }) => {
           },
         ]}
       >
-      <InputNumber
-        style={{
-          width: '100%',
-        }}
-      />
+        <InputNumber
+          style={{
+            width: '100%',
+          }}
+        />
       </Form.Item>
-      
+
       <Form.Item
-        name="customer"
+        name="amount"
+        label="물품 개수"
+        rules={[
+          {
+            required: true,
+            message: '물품 개수는 필수값입니다.',
+          },
+        ]}
+      >
+        <InputNumber
+          style={{
+            width: '100%',
+          }}
+        />
+      </Form.Item>
+
+      <Form.Item
+        name="customerId"
         label="고객 번호"
         rules={[
           {
@@ -96,28 +119,27 @@ const TransactionAddOrChangeForm = ({ onClose, values }) => {
           },
         ]}
       >
-      <InputNumber
-        style={{
-          width: '100%',
-        }}
-      />
+        <InputNumber
+          style={{
+            width: '100%',
+          }}
+        />
       </Form.Item>
 
       <Form.Item
-        name="amount"
-        label="개수"
+        name="paymentType"
+        label="결제 방식"
         rules={[
           {
             required: true,
-            message: '개수는 필수값입니다.',
+            message: '결제 방식은 필수값입니다.',
           },
         ]}
       >
-      <InputNumber
-        style={{
-          width: '100%',
-        }}
-      />
+        <Select placeholder="결제 방식을 선택해주세요...">
+          <Option value="Card">카드</Option>
+          <Option value="Cash">현금</Option>
+        </Select>
       </Form.Item>
 
       <Form.Item
@@ -130,10 +152,7 @@ const TransactionAddOrChangeForm = ({ onClose, values }) => {
           },
         ]}
       >
-        <Select placeholder="환불 여부를 선택해주세요...">
-          <Option value="false">정상</Option>
-          <Option value="true">환불</Option>
-        </Select>
+        <Checkbox>이 거래는 환불 거래입니다</Checkbox>
       </Form.Item>
 
       <Form.Item>
