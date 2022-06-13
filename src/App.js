@@ -10,7 +10,6 @@ import TransactionManagePage from './pages/TransactionManagePage';
 import OrderManagePage from './pages/OrderManagePage';
 import ReturnManagePage from './pages/ReturnManagePage';
 import WarehousingManagePage from './pages/WarehousingManagePage';
-import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import Main from '@components/layout/Main';
 import 'antd/dist/antd.css';
@@ -24,7 +23,6 @@ function App() {
     <ApolloProvider client={client}>
       <div className="App">
         <Switch>
-          <Route path="/sign-up" exact component={SignUp} />
           <Route path="/sign-in" exact component={SignIn} />
           <Main>
             <Route exact path="/dashboard" component={Home} />

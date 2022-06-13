@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu, Button } from 'antd';
-import { NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import logo from '@assets/images/uos25-2.png';
 import { dashboard, signin } from './icons';
 import { navList } from './dummy';
@@ -11,7 +11,9 @@ function Sidenav() {
   return (
     <>
       <div className="brand">
-        <img src={logo} alt="" />
+        <Link to="/dashboard">
+          <img src={logo} alt="" />
+        </Link>
       </div>
       <hr />
       <Menu theme="light" mode="inline">
