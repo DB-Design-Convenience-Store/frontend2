@@ -1,7 +1,8 @@
+import { Button } from 'antd';
 import React from 'react';
 
 // table code start
-export const getColumns = () => [
+export const getColumns = (triggerModalOpen) => [
   {
     title: '물품 번호',
     dataIndex: 'id',
@@ -37,6 +38,21 @@ export const getColumns = () => [
     dataIndex: 'amount',
     render: function (text) {
       return <span>{text}개</span>;
+    },
+  },
+  {
+    title: '수정',
+    key: 'editButton',
+    dataIndex: 'editButton',
+    render: function (_, record) {
+      console.log(record);
+      return (
+        <>
+          <Button type="danger" onClick={() => triggerModalOpen(record)}>
+            직원 수정
+          </Button>
+        </>
+      );
     },
   },
 ];

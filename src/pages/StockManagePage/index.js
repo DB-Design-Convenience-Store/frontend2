@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { getColumns } from './columns';
-import { Row, Col, Card, Radio, Table, Button } from 'antd';
+import { Row, Col, Card, Radio, Table } from 'antd';
 import StockAddOrChangeModal from './modal';
 import { ALL_STOCKS } from './graphql';
 
@@ -19,6 +19,12 @@ function StockManagePage() {
   const handleClose = () => {
     setIsModalVisible(false);
     setValues({ productId: '', location: 'Warehouse', amount: 0 });
+  };
+
+  const triggerModalOpen = (record) => {
+    console.log('onEdit: ', record);
+    setValues(record);
+    showModal();
   };
 
   // useQuery가 hooks 중 맨 아래에 와야 하는 것 같습니다~
@@ -53,7 +59,7 @@ function StockManagePage() {
             >
               <div className="table-responsive">
                 <Table
-                  columns={getColumns()}
+                  columns={getColumns(triggerModalOpen)}
                   dataSource={loading ? [] : finalOutput}
                   pagination={false}
                   className="ant-border-space"
@@ -64,9 +70,6 @@ function StockManagePage() {
         </Row>
         <Row gutter={[24, 0]}>
           <Col span={6} offset={21}>
-            <Button type="primary" onClick={showModal}>
-              재고 등록
-            </Button>
             <StockAddOrChangeModal
               isModalVisible={isModalVisible}
               handleClose={handleClose}
