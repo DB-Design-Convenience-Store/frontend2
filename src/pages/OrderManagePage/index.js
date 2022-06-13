@@ -1,47 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/client';
-import { getColumns } from './columns';
-
+import React, { useState } from 'react';
 import { Row, Col, Card, Radio, Table, Button } from 'antd';
 import OrderAddOrChangeModal from './modal';
-
-const ALL_ORDERS = gql`
-  query {
-    getOrders {
-      ok
-      orders {
-        id
-        createdAt
-        updatedAt
-        price
-        product {
-          id
-          name
-        }
-        amount
-      }
-    }
-  }
-`;
+import { useQuery } from '@apollo/client';
+import { getColumns } from './columns';
+import { ALL_ORDERS } from './graphql';
 
 function OrderManagePage() {
-  const { loading, data } = useQuery(ALL_ORDERS);
-  const [orders, setOrders] = useState([]);
-  useEffect(() => {
-    if (!loading) {
-      setOrders(
-        data.getOrders.orders.map((content) => ({
-          id: content.id,
-          product_id: content.product.id,
-          product_name: content.product.name,
-          price: content.price,
-          amount: content.amount,
-          date: content.createdAt.toString().slice(0, 10),
-        })),
-      );
-    }
-  }, [loading]);
   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -61,6 +25,21 @@ function OrderManagePage() {
     showModal();
   };
 
+  // useQuery가 hooks 중 맨 아래에 와야 하는 것 같습니다~
+  const { loading, error, data } = useQuery(ALL_ORDERS);
+
+  if (loading) return <span>loading...</span>;
+  if (error) return <span>Error!</span>;
+
+  const orders = data.getOrders.orders.map((content) => ({
+    id: content.id,
+    product_id: content.product.id,
+    product_name: content.product.name,
+    price: content.price,
+    amount: content.amount,
+    date: content.createdAt.toString().slice(0, 10),
+  }));
+
   return (
     <>
       <div className="tabled">
@@ -79,14 +58,12 @@ function OrderManagePage() {
               }
             >
               <div className="table-responsive">
-                {!loading && (
-                  <Table
-                    columns={getColumns(triggerModalOpen)}
-                    dataSource={orders}
-                    pagination={false}
-                    className="ant-border-space"
-                  />
-                )}
+                <Table
+                  columns={getColumns(triggerModalOpen)}
+                  dataSource={loading ? [] : orders}
+                  pagination={true}
+                  className="ant-border-space"
+                />
               </div>
             </Card>
           </Col>
