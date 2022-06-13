@@ -19,7 +19,7 @@ export const navList = [
   },
   {
     header: true,
-    name: '직원 관리',
+    name: '직원 관리 ',
   },
   {
     header: false,

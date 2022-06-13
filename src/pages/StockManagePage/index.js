@@ -1,52 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import gql from 'graphql-tag';
+import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { getColumns } from './columns';
-
 import { Row, Col, Card, Radio, Table, Button } from 'antd';
 import StockAddOrChangeModal from './modal';
-
-const ALL_STOCKS = gql`
-  query {
-    getStocks {
-      ok
-      stocks {
-        id
-        createdAt
-        updatedAt
-        location
-        amount
-        productId
-      }
-    }
-  }
-`;
+import { ALL_STOCKS } from './graphql';
 
 function StockManagePage() {
-  const [modifiedStocks, setModifiedStocks] = useState({});
-  const [stocks, setStocks] = useState([]);
-  const { loading, data } = useQuery(ALL_STOCKS);
-  useEffect(() => {
-    if (!loading) {
-      data.getStocks.stocks.map((stock) => {
-        if (stock.location == 'Warehouse') {
-          setModifiedStocks((prevState) => ({ ...prevState, [stock.id]: { warehouse: stock.amount } }));
-        } else {
-          setModifiedStocks((prevState) => ({ ...prevState, [stock.id]: { stand: stock.amount } }));
-        }
-      });
-      setStocks(
-        Object.keys(modifiedStocks).map((key) => ({
-          id: key,
-          warehouse: modifiedStocks[key].warehouse ? modifiedStocks[key].warehouse : 0,
-          stand: modifiedStocks[key].stand ? modifiedStocks[key].stand : 0,
-          amount:
-            (modifiedStocks[key].warehouse ? modifiedStocks[key].warehouse : 0) +
-            (modifiedStocks[key].stand ? modifiedStocks[key].stand : 0),
-        })),
-      );
-    }
-  }, [loading, modifiedStocks]);
   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -61,6 +20,18 @@ function StockManagePage() {
     setIsModalVisible(false);
     setValues({ productId: '', location: 'Warehouse', amount: 0 });
   };
+
+  // useQuery가 hooks 중 맨 아래에 와야 하는 것 같습니다~
+  const { loading, error, data } = useQuery(ALL_STOCKS);
+
+  if (loading) return <span>loading...</span>;
+  if (error) return <span>Error!</span>;
+
+  const d = data.getStocks.stocks.map((item) => ({
+    warehouse: 0,
+    stand: 0,
+    ...item,
+  }));
 
   return (
     <>
@@ -80,9 +51,12 @@ function StockManagePage() {
               }
             >
               <div className="table-responsive">
-                {!loading && (
-                  <Table columns={getColumns()} dataSource={stocks} pagination={false} className="ant-border-space" />
-                )}
+                <Table
+                  columns={getColumns()}
+                  dataSource={loading ? [] : d}
+                  pagination={false}
+                  className="ant-border-space"
+                />
               </div>
             </Card>
           </Col>

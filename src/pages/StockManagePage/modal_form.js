@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import { Button, Form, InputNumber, Input, message } from 'antd';
+import { NEW_STOCK } from './graphql';
 
 const formItemLayout = {
   labelCol: {
@@ -22,25 +22,9 @@ const formItemLayout = {
   },
 };
 
-const NEW_STOCK = gql`
-  mutation createStock($newStock: CreateStockInput!) {
-    createStock(input: $newStock) {
-      ok
-      error
-    }
-  }
-`;
-
 const StockAddOrChangeForm = ({ onClose, values }) => {
   const [form] = Form.useForm();
-  const [createStock, { loading, error }] = useMutation(NEW_STOCK, {
-    onCompleted: () => {
-      message.success('등록 성공');
-    },
-    onError: (error) => {
-      message.error(error);
-    },
-  });
+  const [createStock, { loading }] = useMutation(NEW_STOCK);
 
   useEffect(() => {
     form.setFieldsValue({
@@ -48,25 +32,38 @@ const StockAddOrChangeForm = ({ onClose, values }) => {
     });
   }, [values]);
 
-  /* eslint-disable */
   const onFinish = (values) => {
-		console.log(values)
-    createStock({ variables: { "newStock": values } });
-    //form.resetFields();
-    //onClose();
+    console.log('onFinish:', values);
+    createStock({ variables: { newStock: values } }).then((result) => {
+      const { ok, error } = result.data.createStock;
+      if (ok) {
+        message.success('등록에 성공했습니다.');
+        form.resetFields();
+        onClose();
+      } else {
+        message.error('등록에 실패하였습니다: ' + error);
+      }
+    });
   };
 
   const onFinishFailed = (values) => {
-    console.log(JSON.stringify(values));
-    message.error("등록에 실패하였습니다: " + JSON.stringify(values));
+    console.log('onFinishFailed:', JSON.stringify(values));
+    message.error('잘못된 입력입니다: ' + JSON.stringify(values));
     onClose();
-  }
+  };
 
-	if (loading) return 'submitting...';
-  if (error) return error.message;
+  if (loading) return <span>로딩 중입니다...</span>;
 
   return (
-    <Form {...formItemLayout} form={form} name="stock" onFinish={onFinish} onFinishFailed={onFinishFailed} size="large" scrollToFirstError>
+    <Form
+      {...formItemLayout}
+      form={form}
+      name="stock"
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+      size="large"
+      scrollToFirstError
+    >
       <Form.Item
         name="productId"
         label="물품 번호"
@@ -93,7 +90,7 @@ const StockAddOrChangeForm = ({ onClose, values }) => {
           <Radio value="Stand">매대</Radio>
         </Radio.Group>
       </Form.Item>*/}
-			<Form.Item
+      <Form.Item
         name="location"
         label="위치"
         rules={[
