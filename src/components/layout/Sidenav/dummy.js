@@ -2,30 +2,20 @@ import { dashboard, tables, profile } from './icons';
 
 export const navList = [
   {
-    header: true,
-    name: '편의점 관리',
-  },
-  {
     header: false,
     link: '/dashboard',
     icon: dashboard,
     name: '대시보드',
   },
   {
+    header: true,
+    name: '편의점 관리',
+  },
+  {
     header: false,
     link: '/stock',
     icon: tables,
     name: '재고 관리',
-  },
-  {
-    header: true,
-    name: '직원 관리 ',
-  },
-  {
-    header: false,
-    link: '/employees',
-    icon: profile,
-    name: '직원 관리',
   },
   {
     header: false,
@@ -35,7 +25,7 @@ export const navList = [
   },
   {
     header: false,
-    link: '/loststocks',
+    link: '/losses',
     icon: tables,
     name: '재고 손실 관리',
   },
@@ -62,5 +52,15 @@ export const navList = [
     link: '/warehousing',
     icon: tables,
     name: '입고 관리',
+  },
+  {
+    header: true,
+    name: '인력 관리',
+  },
+  {
+    header: false,
+    link: '/employees',
+    icon: profile,
+    name: '직원 관리',
   },
 ];

@@ -25,7 +25,7 @@ const formItemLayout = {
   },
 };
 
-const LostStockAddOrChangeForm = ({ onClose, values }) => {
+const LossAddOrChangeForm = ({ onClose, values }) => {
   const [form] = Form.useForm();
   const [createLoss, { loading }] = useMutation(NEW_LOSS);
 
@@ -139,4 +139,4 @@ const LostStockAddOrChangeForm = ({ onClose, values }) => {
   );
 };
 
-export default LostStockAddOrChangeForm;
+export default LossAddOrChangeForm;

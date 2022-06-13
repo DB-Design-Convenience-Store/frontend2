@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-import { Row, Col, Breadcrumb, Badge, Dropdown, Button, Input } from 'antd';
+import { Row, Col, Breadcrumb, Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { NavLink, Link } from 'react-router-dom';
-import { bell, toggler, profile } from './icons';
-import { MenuOnBellClick } from './style';
+import { profile } from './icons';
 
-function Header({ name, subName, onPress }) {
+function Header({ name, subName }) {
   // eslint-disable-next-line no-undef
   useEffect(() => window.scrollTo(0, 0));
 
@@ -26,16 +25,6 @@ function Header({ name, subName, onPress }) {
           </div>
         </Col>
         <Col span={24} md={18} className="header-control">
-          <Badge size="small" count={4}>
-            <Dropdown overlay={MenuOnBellClick} trigger={['click']}>
-              <a href="#pablo" className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-                {bell}
-              </a>
-            </Dropdown>
-          </Badge>
-          <Button type="link" className="sidebar-toggler" onClick={() => onPress()}>
-            {toggler}
-          </Button>
           <Link to="/sign-in" className="btn-sign-in">
             {profile}
             <span>Sign in</span>

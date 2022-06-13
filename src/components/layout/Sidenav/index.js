@@ -2,7 +2,7 @@ import React from 'react';
 import { Menu, Button } from 'antd';
 import { NavLink, useLocation } from 'react-router-dom';
 import logo from '@assets/images/uos25-2.png';
-import { dashboard, signin, signup } from './icons';
+import { dashboard, signin } from './icons';
 import { navList } from './dummy';
 
 function Sidenav() {
@@ -40,12 +40,6 @@ function Sidenav() {
           <NavLink to="/sign-in">
             <span className="icon">{signin}</span>
             <span className="label">로그인</span>
-          </NavLink>
-        </Menu.Item>
-        <Menu.Item key="8">
-          <NavLink to="/sign-up">
-            <span className="icon">{signup}</span>
-            <span className="label">회원 가입</span>
           </NavLink>
         </Menu.Item>
       </Menu>

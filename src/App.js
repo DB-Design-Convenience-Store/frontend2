@@ -5,7 +5,7 @@ import StockManagePage from './pages/StockManagePage';
 import Billing from './pages/Billing';
 import EmployeeManagePage from './pages/EmployeeManagePage';
 import FundManagePage from './pages/FundManagePage';
-import LostStockManagePage from './pages/LostStockManagePage';
+import LossManagePage from './pages/LossManagePage';
 import TransactionManagePage from './pages/TransactionManagePage';
 import OrderManagePage from './pages/OrderManagePage';
 import ReturnManagePage from './pages/ReturnManagePage';
@@ -32,7 +32,7 @@ function App() {
             <Route exact path="/billing" component={Billing} />
             <Route exact path="/employees" component={EmployeeManagePage} />
             <Route exact path="/funds" component={FundManagePage} />
-            <Route exact path="/loststocks" component={LostStockManagePage} />
+            <Route exact path="/losses" component={LossManagePage} />
             <Route exact path="/transactions" component={TransactionManagePage} />
             <Route exact path="/orders" component={OrderManagePage} />
             <Route exact path="/returns" component={ReturnManagePage} />
