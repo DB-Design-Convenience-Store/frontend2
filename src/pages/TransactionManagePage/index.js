@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { data } from './data';
 import { getColumns } from './columns';
 
 import { Row, Col, Card, Radio, Table, Button } from 'antd';
 import TransactionAddOrChangeModal from './modal';
+import { ALL_TX } from './graphql';
+import { useQuery } from '@apollo/client';
 
 function TransactionManagePage() {
   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
@@ -25,6 +26,21 @@ function TransactionManagePage() {
     setValues(record);
     showModal();
   };
+
+  // useQuery가 hooks 중 맨 아래에 와야 하는 것 같습니다~
+  const { loading, error, data, refetch } = useQuery(ALL_TX);
+
+  if (loading) return <span>loading...</span>;
+  if (error) return <span>Error!</span>;
+
+  const txs = data.getTransactions.transactions.map((item) => ({
+    ...item,
+    key: item.id,
+    customerId: item.customer.id,
+    productId: item.product.id,
+    productName: item.product.name,
+    totalPayed: item.amount * item.product.price,
+  }));
 
   return (
     <>
@@ -48,7 +64,7 @@ function TransactionManagePage() {
               <div className="table-responsive">
                 <Table
                   columns={getColumns(triggerModalOpen)}
-                  dataSource={data}
+                  dataSource={loading ? [] : txs}
                   pagination={false}
                   className="ant-border-space"
                 />
@@ -56,13 +72,17 @@ function TransactionManagePage() {
             </Card>
           </Col>
         </Row>
-        {/* 아래의 Row, Col 의 배치 방식은 아직 잘 모르겠다. */}
         <Row gutter={[24, 0]}>
           <Col span={6} offset={22}>
             <Button type="primary" onClick={showModal}>
               내역 등록
             </Button>
-            <TransactionAddOrChangeModal isModalVisible={isModalVisible} handleClose={handleClose} values={values} />
+            <TransactionAddOrChangeModal
+              isModalVisible={isModalVisible}
+              handleClose={handleClose}
+              values={values}
+              refetch={refetch}
+            />
           </Col>
         </Row>
       </div>

@@ -24,9 +24,11 @@ const formItemLayout = {
   },
 };
 
-const TransactionAddOrChangeForm = ({ onClose, values }) => {
+const TransactionAddOrChangeForm = ({ onClose, values, refetch }) => {
   const [form] = Form.useForm();
-  const [createTransaction, { loading }] = useMutation(NEW_TX);
+  const [createTransaction, { loading }] = useMutation(NEW_TX, {
+    onCompleted: refetch,
+  });
 
   useEffect(() => {
     form.setFieldsValue({

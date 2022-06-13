@@ -2,8 +2,8 @@ import { Modal } from 'antd';
 import React from 'react';
 import OrderAddOrChangeForm from './modal_form';
 
-const OrderAddOrChangeModal = ({ isModalVisible, handleClose, values }) => {
-  const MODAL_TITLE = 'UOS25 서울시립대점 발주 관리';
+const OrderAddOrChangeModal = ({ isModalVisible, handleClose, values, refetch }) => {
+  const MODAL_TITLE = 'UOS25 서울시립대점 발주 내역 등록';
 
   return (
     <Modal
@@ -15,7 +15,7 @@ const OrderAddOrChangeModal = ({ isModalVisible, handleClose, values }) => {
       bodyStyle={{ overflowY: 'auto', maxHeight: 'calc(100vh - 300px)' }}
       footer={null}
     >
-      <OrderAddOrChangeForm onClose={handleClose} values={values} />
+      <OrderAddOrChangeForm onClose={handleClose} values={values} refetch={refetch} />
     </Modal>
   );
 };

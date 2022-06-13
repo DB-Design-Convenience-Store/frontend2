@@ -25,9 +25,11 @@ const formItemLayout = {
   },
 };
 
-const LostStockAddOrChangeForm = ({ onClose, values }) => {
+const LossAddOrChangeForm = ({ onClose, values, refetch }) => {
   const [form] = Form.useForm();
-  const [createLoss, { loading }] = useMutation(NEW_LOSS);
+  const [createLoss, { loading }] = useMutation(NEW_LOSS, {
+    onCompleted: refetch,
+  });
 
   useEffect(() => {
     form.setFieldsValue({
@@ -139,4 +141,4 @@ const LostStockAddOrChangeForm = ({ onClose, values }) => {
   );
 };
 
-export default LostStockAddOrChangeForm;
+export default LossAddOrChangeForm;

@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { useMutation } from '@apollo/client';
-import { Button, Form, InputNumber, Input, message } from 'antd';
+import { Button, Form, InputNumber, message, Select } from 'antd';
 import { NEW_STOCK } from './graphql';
+
+const { Option } = Select;
 
 const formItemLayout = {
   labelCol: {
@@ -22,9 +24,11 @@ const formItemLayout = {
   },
 };
 
-const StockAddOrChangeForm = ({ onClose, values }) => {
+const StockAddOrChangeForm = ({ onClose, values, refetch }) => {
   const [form] = Form.useForm();
-  const [createStock, { loading }] = useMutation(NEW_STOCK);
+  const [createStock, { loading }] = useMutation(NEW_STOCK, {
+    onCompleted: refetch,
+  });
 
   useEffect(() => {
     form.setFieldsValue({
@@ -99,11 +103,10 @@ const StockAddOrChangeForm = ({ onClose, values }) => {
           },
         ]}
       >
-        <Input
-          style={{
-            width: '100%',
-          }}
-        />
+        <Select placeholder="위치를 선택해주세요...">
+          <Option value="Warehouse">창고</Option>
+          <Option value="Stand">매대</Option>
+        </Select>
       </Form.Item>
 
       <Form.Item

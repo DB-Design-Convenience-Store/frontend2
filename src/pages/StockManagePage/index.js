@@ -22,15 +22,16 @@ function StockManagePage() {
   };
 
   // useQuery가 hooks 중 맨 아래에 와야 하는 것 같습니다~
-  const { loading, error, data } = useQuery(ALL_STOCKS);
+  const { loading, error, data, refetch } = useQuery(ALL_STOCKS);
 
   if (loading) return <span>loading...</span>;
   if (error) return <span>Error!</span>;
 
-  const d = data.getStocks.stocks.map((item) => ({
-    warehouse: 0,
-    stand: 0,
+  const finalOutput = data.getStocks.stocks.map((item) => ({
     ...item,
+    key: item.product.id,
+    id: item.product.id,
+    name: item.product.name,
   }));
 
   return (
@@ -53,7 +54,7 @@ function StockManagePage() {
               <div className="table-responsive">
                 <Table
                   columns={getColumns()}
-                  dataSource={loading ? [] : d}
+                  dataSource={loading ? [] : finalOutput}
                   pagination={false}
                   className="ant-border-space"
                 />
@@ -66,7 +67,12 @@ function StockManagePage() {
             <Button type="primary" onClick={showModal}>
               재고 등록
             </Button>
-            <StockAddOrChangeModal isModalVisible={isModalVisible} handleClose={handleClose} values={values} />
+            <StockAddOrChangeModal
+              isModalVisible={isModalVisible}
+              handleClose={handleClose}
+              values={values}
+              refetch={refetch}
+            />
           </Col>
         </Row>
       </div>

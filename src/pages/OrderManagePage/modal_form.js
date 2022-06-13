@@ -23,9 +23,11 @@ const formItemLayout = {
   },
 };
 
-const OrderAddOrChangeForm = ({ onClose, values }) => {
+const OrderAddOrChangeForm = ({ onClose, values, refetch }) => {
   const [form] = Form.useForm();
-  const [createOrder, { loading }] = useMutation(NEW_ORDER);
+  const [createOrder, { loading }] = useMutation(NEW_ORDER, {
+    onCompleted: refetch,
+  });
 
   useEffect(() => {
     form.setFieldsValue({

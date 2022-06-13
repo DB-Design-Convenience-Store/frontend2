@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { getColumns } from './columns';
 import { Row, Col, Card, Radio, Table, Button } from 'antd';
-import LostStockAddOrChangeModal from './modal';
+import LossAddOrChangeModal from './modal';
 import { ALL_LOSSES } from './graphql';
 
-function LostStockManagePage() {
+function LossManagePage() {
   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -26,7 +26,7 @@ function LostStockManagePage() {
     showModal();
   };
 
-  const { loading, error, data } = useQuery(ALL_LOSSES);
+  const { loading, error, data, refetch } = useQuery(ALL_LOSSES);
   if (loading) return <span>loading...</span>;
   if (error) return <span>Error!</span>;
 
@@ -72,7 +72,12 @@ function LostStockManagePage() {
             <Button type="primary" onClick={showModal}>
               내역 등록
             </Button>
-            <LostStockAddOrChangeModal isModalVisible={isModalVisible} handleClose={handleClose} values={values} />
+            <LossAddOrChangeModal
+              isModalVisible={isModalVisible}
+              handleClose={handleClose}
+              values={values}
+              refetch={refetch}
+            />
           </Col>
         </Row>
       </div>
@@ -80,4 +85,4 @@ function LostStockManagePage() {
   );
 }
 
-export default LostStockManagePage;
+export default LossManagePage;

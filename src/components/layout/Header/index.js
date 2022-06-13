@@ -1,13 +1,20 @@
-import React, { useEffect } from 'react';
-import { Row, Col, Breadcrumb, Badge, Dropdown, Button, Input } from 'antd';
+import React, { useContext, useEffect } from 'react';
+import { Row, Col, Breadcrumb, Input, message } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import { NavLink, Link } from 'react-router-dom';
-import { bell, toggler, profile } from './icons';
-import { MenuOnBellClick } from './style';
+import { Link } from 'react-router-dom';
+import { profile } from './icons';
+import { UserContext } from '../../../store/UserContext';
 
-function Header({ name, subName, onPress }) {
+function Header({ name, subName }) {
   // eslint-disable-next-line no-undef
   useEffect(() => window.scrollTo(0, 0));
+
+  const { isLoggedIn, logout } = useContext(UserContext);
+
+  const onLogout = () => {
+    logout();
+    message.success('로그아웃이 완료되었습니다.');
+  };
 
   return (
     <>
@@ -15,7 +22,7 @@ function Header({ name, subName, onPress }) {
         <Col span={24} md={6}>
           <Breadcrumb>
             <Breadcrumb.Item>
-              <NavLink to="/">UOS25</NavLink>
+              <Link to="/dashboard">UOS25</Link>
             </Breadcrumb.Item>
             <Breadcrumb.Item style={{ textTransform: 'capitalize' }}>{name.replace('/', '')}</Breadcrumb.Item>
           </Breadcrumb>
@@ -26,20 +33,18 @@ function Header({ name, subName, onPress }) {
           </div>
         </Col>
         <Col span={24} md={18} className="header-control">
-          <Badge size="small" count={4}>
-            <Dropdown overlay={MenuOnBellClick} trigger={['click']}>
-              <a href="#pablo" className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-                {bell}
-              </a>
-            </Dropdown>
-          </Badge>
-          <Button type="link" className="sidebar-toggler" onClick={() => onPress()}>
-            {toggler}
-          </Button>
-          <Link to="/sign-in" className="btn-sign-in">
-            {profile}
-            <span>Sign in</span>
-          </Link>
+          {isLoggedIn ? (
+            <Link to="/dashboard" onClick={onLogout} className="btn-sign-in">
+              {profile}
+              <span>로그아웃</span>
+            </Link>
+          ) : (
+            <Link to="/sign-in" className="btn-sign-in">
+              {profile}
+              <span>로그인</span>
+            </Link>
+          )}
+
           <Input className="header-search" placeholder="Type here..." prefix={<SearchOutlined />} />
         </Col>
       </Row>

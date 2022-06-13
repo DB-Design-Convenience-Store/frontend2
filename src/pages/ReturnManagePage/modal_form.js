@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
 import moment from 'moment';
-import { Button, Form, Input, InputNumber, message } from 'antd';
+import { Button, Form, Input, InputNumber, message, Select } from 'antd';
+import { useMutation } from '@apollo/client';
+import { NEW_RETURN } from './graphql';
+
+const { Option } = Select;
 
 const formItemLayout = {
   labelCol: {
@@ -21,9 +25,11 @@ const formItemLayout = {
   },
 };
 
-const ReturnAddOrChangeForm = ({ onClose, values }) => {
+const ReturnAddOrChangeForm = ({ onClose, values, refetch }) => {
   const [form] = Form.useForm();
-  const today = new Date().toISOString().slice(0, 10);
+  const [createReturn, { loading }] = useMutation(NEW_RETURN, {
+    onCompleted: refetch,
+  });
 
   useEffect(() => {
     form.setFieldsValue({
@@ -36,53 +42,65 @@ const ReturnAddOrChangeForm = ({ onClose, values }) => {
     });
   }, [values]);
 
-  /* eslint-disable */
   const onFinish = (values) => {
-    console.log(JSON.stringify(values));
-    message.success("등록에 성공하였습니다: " + JSON.stringify(values));
-    form.resetFields();
-    onClose();
+    console.log('onFinish:', values);
+    createReturn({ variables: { newReturn: values } }).then((result) => {
+      const { ok, error } = result.data.createReturn;
+      if (ok) {
+        message.success('등록에 성공했습니다.');
+        form.resetFields();
+        onClose();
+      } else {
+        message.error('등록에 실패하였습니다: ' + error);
+      }
+    });
   };
 
   const onFinishFailed = (values) => {
-    console.log(JSON.stringify(values));
-    message.error("등록에 실패하였습니다: " + JSON.stringify(values));
-  }
+    console.log('onFinishFailed:', JSON.stringify(values));
+    message.error('잘못된 입력입니다: ' + JSON.stringify(values));
+  };
+
+  if (loading) return <span>로딩 중입니다...</span>;
 
   return (
-    <Form {...formItemLayout} form={form} name="worker" onFinish={onFinish} onFinishFailed={onFinishFailed} size="large" scrollToFirstError>
+    <Form
+      {...formItemLayout}
+      form={form}
+      name="worker"
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+      size="large"
+      scrollToFirstError
+    >
       <Form.Item
-        name="id"
-        label="반품 번호"
+        name="productId"
+        label="물품 번호"
         rules={[
           {
             required: true,
-            message: '반품 번호는 필수값입니다.',
+            message: '물품 번호는 필수값입니다.',
           },
         ]}
       >
-      <InputNumber
-        style={{
-          width: '100%',
-        }}
-      />
+        <InputNumber
+          style={{
+            width: '100%',
+          }}
+        />
       </Form.Item>
 
       <Form.Item
-        name="product_id"
-        label="물품 번호"
-		rules={[
-		  {
-			required: true,
-			 message: '물품 번호는 필수값입니다.',
-		  },
-		]}
+        name="reason"
+        label="반품 사유"
+        rules={[
+          {
+            required: true,
+            message: '반품 사유는 필수값입니다.',
+          },
+        ]}
       >
-      <InputNumber
-        style={{
-          width: '100%',
-        }}
-      />
+        <Input />
       </Form.Item>
 
       <Form.Item
@@ -95,29 +113,27 @@ const ReturnAddOrChangeForm = ({ onClose, values }) => {
           },
         ]}
       >
-      <InputNumber
-        style={{
-          width: '100%',
-        }}
-      />
+        <InputNumber
+          style={{
+            width: '100%',
+          }}
+        />
       </Form.Item>
 
-	  <Form.Item
-        name="date"
-        label="반품일자"
+      <Form.Item
+        name="location"
+        label="위치"
         rules={[
           {
             required: true,
+            message: '위치는 필수값입니다.',
           },
         ]}
       >
-      <Input
-	    disabled
-        style={{
-          width: '100%',
-        }}
-		defaultValue={today}
-      />
+        <Select placeholder="위치를 선택해주세요...">
+          <Option value="Warehouse">창고</Option>
+          <Option value="Stand">매대</Option>
+        </Select>
       </Form.Item>
 
       <Form.Item>

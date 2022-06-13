@@ -2,7 +2,7 @@ import { Modal } from 'antd';
 import React from 'react';
 import EmployeeAddOrChangeForm from './modal_form';
 
-const EmployeeAddOrChangeModal = ({ isModalVisible, handleClose, values }) => {
+const EmployeeAddOrChangeModal = ({ isModalVisible, handleClose, values, refetch }) => {
   const MODAL_TITLE = 'UOS25 서울시립대점 직원 등록';
 
   return (
@@ -15,7 +15,7 @@ const EmployeeAddOrChangeModal = ({ isModalVisible, handleClose, values }) => {
       bodyStyle={{ overflowY: 'auto', maxHeight: 'calc(100vh - 300px)' }}
       footer={null}
     >
-      <EmployeeAddOrChangeForm onClose={handleClose} values={values} />
+      <EmployeeAddOrChangeForm onClose={handleClose} values={values} refetch={refetch} />
     </Modal>
   );
 };
