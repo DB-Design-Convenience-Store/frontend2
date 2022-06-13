@@ -20,8 +20,8 @@ export const ALL_STOCKS = gql`
 `;
 
 export const NEW_STOCK = gql`
-  mutation createStock($newStock: CreateStockInput!) {
-    createStock(input: $newStock) {
+  mutation editStock($newStock: EditStockInput!) {
+    editStock(input: $editStock) {
       ok
       error
     }
