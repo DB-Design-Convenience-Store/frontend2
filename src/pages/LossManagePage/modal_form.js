@@ -25,9 +25,11 @@ const formItemLayout = {
   },
 };
 
-const LossAddOrChangeForm = ({ onClose, values }) => {
+const LossAddOrChangeForm = ({ onClose, values, refetch }) => {
   const [form] = Form.useForm();
-  const [createLoss, { loading }] = useMutation(NEW_LOSS);
+  const [createLoss, { loading }] = useMutation(NEW_LOSS, {
+    onCompleted: refetch,
+  });
 
   useEffect(() => {
     form.setFieldsValue({

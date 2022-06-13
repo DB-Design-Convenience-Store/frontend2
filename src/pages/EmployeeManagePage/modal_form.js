@@ -25,9 +25,11 @@ const formItemLayout = {
   },
 };
 
-const EmployeeAddOrChangeForm = ({ onClose, values }) => {
+const EmployeeAddOrChangeForm = ({ onClose, values, refetch }) => {
   const [form] = Form.useForm();
-  const [createUser, { loading }] = useMutation(NEW_EMPLOYEE);
+  const [createUser, { loading }] = useMutation(NEW_EMPLOYEE, {
+    onCompleted: refetch,
+  });
 
   useEffect(() => {
     form.setFieldsValue({
@@ -186,19 +188,6 @@ const EmployeeAddOrChangeForm = ({ onClose, values }) => {
       >
         <DatePicker />
       </Form.Item>
-
-      {/* <Form.Item
-        name="payDate"
-        label="급여지급일자"
-        rules={[
-          {
-            required: true,
-            message: '급여지급일자는 필수값입니다.',
-          },
-        ]}
-      >
-        <DatePicker />
-      </Form.Item> */}
 
       <Form.Item>
         <Button type="primary" htmlType="submit">

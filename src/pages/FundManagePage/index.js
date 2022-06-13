@@ -32,7 +32,7 @@ function FundManagePage() {
   };
 
   // useQuery가 hooks 중 맨 아래에 와야 하는 것 같습니다~
-  const { loading, error, data } = useQuery(ALL_FUNDS);
+  const { loading, error, data, refetch } = useQuery(ALL_FUNDS);
 
   if (loading) return <span>loading...</span>;
   if (error) return <span>Error!</span>;
@@ -91,7 +91,12 @@ function FundManagePage() {
             <Button type="primary" onClick={showModal}>
               내역 등록
             </Button>
-            <FundAddOrChangeModal isModalVisible={isModalVisible} handleClose={handleClose} values={values} />
+            <FundAddOrChangeModal
+              isModalVisible={isModalVisible}
+              handleClose={handleClose}
+              values={values}
+              refetch={refetch}
+            />
           </Col>
         </Row>
       </div>

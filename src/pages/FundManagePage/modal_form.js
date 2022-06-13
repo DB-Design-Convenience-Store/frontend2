@@ -24,9 +24,11 @@ const formItemLayout = {
   },
 };
 
-const FundAddOrChangeForm = ({ onClose, values }) => {
+const FundAddOrChangeForm = ({ onClose, values, refetch }) => {
   const [form] = Form.useForm();
-  const [createFund, { loading }] = useMutation(NEW_FUND);
+  const [createFund, { loading }] = useMutation(NEW_FUND, {
+    onCompleted: refetch,
+  });
 
   useEffect(() => {
     form.setFieldsValue(values);

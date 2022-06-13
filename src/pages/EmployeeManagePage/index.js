@@ -27,7 +27,7 @@ function EmployeeManagePage() {
   };
 
   // useQuery가 hooks 중 맨 아래에 와야 하는 것 같습니다~
-  const { loading, error, data } = useQuery(ALL_EMPLOYEES);
+  const { loading, error, data, refetch } = useQuery(ALL_EMPLOYEES);
 
   if (loading) return <span>loading...</span>;
   if (error) return <span>Error!</span>;
@@ -35,6 +35,7 @@ function EmployeeManagePage() {
   const employees = data.getUsers.users
     .map((emp) => ({
       ...emp,
+      key: emp.id,
       hiredDate: !emp.hiredDate ? '' : emp.hiredDate.slice(0, 10),
       firedDate: !emp.firedDate ? '' : emp.firedDate.slice(0, 10),
       payDate: !emp.payDate ? '' : emp.payDate.slice(0, 10),
@@ -78,7 +79,12 @@ function EmployeeManagePage() {
             <Button type="primary" onClick={showModal}>
               직원 등록
             </Button>
-            <EmployeeAddOrChangeModal isModalVisible={isModalVisible} handleClose={handleClose} values={values} />
+            <EmployeeAddOrChangeModal
+              isModalVisible={isModalVisible}
+              handleClose={handleClose}
+              values={values}
+              refetch={refetch}
+            />
           </Col>
         </Row>
       </div>

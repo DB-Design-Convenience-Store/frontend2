@@ -25,9 +25,11 @@ const formItemLayout = {
   },
 };
 
-const WarehousingAddOrChangeForm = ({ onClose, values }) => {
+const WarehousingAddOrChangeForm = ({ onClose, values, refetch }) => {
   const [form] = Form.useForm();
-  const [createWarehousing, { loading }] = useMutation(NEW_WAREHOUSING);
+  const [createWarehousing, { loading }] = useMutation(NEW_WAREHOUSING, {
+    onCompleted: refetch,
+  });
 
   useEffect(() => {
     form.setFieldsValue({

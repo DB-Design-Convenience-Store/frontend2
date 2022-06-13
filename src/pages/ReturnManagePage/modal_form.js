@@ -25,9 +25,11 @@ const formItemLayout = {
   },
 };
 
-const ReturnAddOrChangeForm = ({ onClose, values }) => {
+const ReturnAddOrChangeForm = ({ onClose, values, refetch }) => {
   const [form] = Form.useForm();
-  const [createReturn, { loading }] = useMutation(NEW_RETURN);
+  const [createReturn, { loading }] = useMutation(NEW_RETURN, {
+    onCompleted: refetch,
+  });
 
   useEffect(() => {
     form.setFieldsValue({

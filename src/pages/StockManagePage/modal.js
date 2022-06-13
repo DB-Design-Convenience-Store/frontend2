@@ -2,7 +2,7 @@ import { Modal } from 'antd';
 import React from 'react';
 import StockAddOrChangeForm from './modal_form';
 
-const StockAddOrChangeModal = ({ isModalVisible, handleClose, values }) => {
+const StockAddOrChangeModal = ({ isModalVisible, handleClose, values, refetch }) => {
   const MODAL_TITLE = 'UOS25 서울시립대점 재고 관리';
 
   return (
@@ -15,7 +15,7 @@ const StockAddOrChangeModal = ({ isModalVisible, handleClose, values }) => {
       bodyStyle={{ overflowY: 'auto', maxHeight: 'calc(100vh - 300px)' }}
       footer={null}
     >
-      <StockAddOrChangeForm onClose={handleClose} values={values} />
+      <StockAddOrChangeForm onClose={handleClose} values={values} refetch={refetch} />
     </Modal>
   );
 };

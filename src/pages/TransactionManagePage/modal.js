@@ -2,7 +2,7 @@ import { Modal } from 'antd';
 import React from 'react';
 import TransactionAddOrChangeForm from './modal_form';
 
-const TransactionAddOrChangeModal = ({ isModalVisible, handleClose, values }) => {
+const TransactionAddOrChangeModal = ({ isModalVisible, handleClose, values, refetch }) => {
   const MODAL_TITLE = 'UOS25 서울시립대점 직원 등록';
 
   return (
@@ -15,7 +15,7 @@ const TransactionAddOrChangeModal = ({ isModalVisible, handleClose, values }) =>
       bodyStyle={{ overflowY: 'auto', maxHeight: 'calc(100vh - 300px)' }}
       footer={null}
     >
-      <TransactionAddOrChangeForm onClose={handleClose} values={values} />
+      <TransactionAddOrChangeForm onClose={handleClose} values={values} refetch={refetch} />
     </Modal>
   );
 };

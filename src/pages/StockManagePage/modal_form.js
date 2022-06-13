@@ -22,9 +22,11 @@ const formItemLayout = {
   },
 };
 
-const StockAddOrChangeForm = ({ onClose, values }) => {
+const StockAddOrChangeForm = ({ onClose, values, refetch }) => {
   const [form] = Form.useForm();
-  const [createStock, { loading }] = useMutation(NEW_STOCK);
+  const [createStock, { loading }] = useMutation(NEW_STOCK, {
+    onCompleted: refetch,
+  });
 
   useEffect(() => {
     form.setFieldsValue({

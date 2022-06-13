@@ -26,7 +26,7 @@ function LossManagePage() {
     showModal();
   };
 
-  const { loading, error, data } = useQuery(ALL_LOSSES);
+  const { loading, error, data, refetch } = useQuery(ALL_LOSSES);
   if (loading) return <span>loading...</span>;
   if (error) return <span>Error!</span>;
 
@@ -72,7 +72,12 @@ function LossManagePage() {
             <Button type="primary" onClick={showModal}>
               내역 등록
             </Button>
-            <LossAddOrChangeModal isModalVisible={isModalVisible} handleClose={handleClose} values={values} />
+            <LossAddOrChangeModal
+              isModalVisible={isModalVisible}
+              handleClose={handleClose}
+              values={values}
+              refetch={refetch}
+            />
           </Col>
         </Row>
       </div>
