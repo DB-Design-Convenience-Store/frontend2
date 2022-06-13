@@ -49,7 +49,6 @@ const StockAddOrChangeForm = ({ onClose, values }) => {
   const onFinishFailed = (values) => {
     console.log('onFinishFailed:', JSON.stringify(values));
     message.error('잘못된 입력입니다: ' + JSON.stringify(values));
-    onClose();
   };
 
   if (loading) return <span>로딩 중입니다...</span>;
