@@ -37,8 +37,8 @@ function App() {
             <Route exact path="/orders" component={OrderManagePage} />
             <Route exact path="/returns" component={ReturnManagePage} />
             <Route exact path="/warehousing" component={WarehousingManagePage} />
-            <Redirect from="*" to="/dashboard" />
           </Main>
+          <Redirect from="*" to="/dashboard" />
         </Switch>
       </div>
     </ApolloProvider>
