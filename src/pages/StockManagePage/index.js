@@ -27,10 +27,9 @@ function StockManagePage() {
   if (loading) return <span>loading...</span>;
   if (error) return <span>Error!</span>;
 
-  const d = data.getStocks.stocks.map((item) => ({
-    warehouse: 0,
-    stand: 0,
+  const finalOutput = data.getStocks.stocks.map((item) => ({
     ...item,
+    key: item.product.id,
     id: item.product.id,
     name: item.product.name,
   }));
@@ -55,7 +54,7 @@ function StockManagePage() {
               <div className="table-responsive">
                 <Table
                   columns={getColumns()}
-                  dataSource={loading ? [] : d}
+                  dataSource={loading ? [] : finalOutput}
                   pagination={false}
                   className="ant-border-space"
                 />
