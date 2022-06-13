@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Button, Checkbox, Form, InputNumber, message, Select } from 'antd';
+import { Button, Form, InputNumber, message, Select } from 'antd';
 import { useMutation } from '@apollo/client';
 import { NEW_TX } from './graphql';
 
@@ -46,7 +46,7 @@ const TransactionAddOrChangeForm = ({ onClose, values, refetch }) => {
       },
       paymentType: values.paymentType,
       customerId: values.customerId,
-      isRefund: values.isRefund === 'checked' ? true : false,
+      isRefund: values.isRefund === 'true' ? true : false,
     };
     createTransaction({ variables: { newTransaction } }).then((result) => {
       const { ok, error } = result.data.createTransaction;
@@ -154,7 +154,10 @@ const TransactionAddOrChangeForm = ({ onClose, values, refetch }) => {
           },
         ]}
       >
-        <Checkbox>이 거래는 환불 거래입니다</Checkbox>
+        <Select placeholder="판매/환불을 선택해주세요...">
+          <Option value="false">판매</Option>
+          <Option value="true">환불</Option>
+        </Select>
       </Form.Item>
 
       <Form.Item>

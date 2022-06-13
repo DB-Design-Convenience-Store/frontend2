@@ -19,7 +19,7 @@ export const logUserOut = () => {
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_BACKEND
     ? process.env.REACT_APP_BACKEND
-    : 'https://tender-pandas-work-210-179-213-187.loca.lt/graphql',
+    : 'https://clear-hounds-buy-222-109-143-196.loca.lt/graphql',
 });
 
 //토큰은 header의 x-jwt 에 들어갑니다.

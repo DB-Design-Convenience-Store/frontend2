@@ -33,14 +33,16 @@ function TransactionManagePage() {
   if (loading) return <span>loading...</span>;
   if (error) return <span>Error!</span>;
 
-  const txs = data.getTransactions.transactions.map((item) => ({
-    ...item,
-    key: item.id,
-    customerId: item.customer.id,
-    productId: item.product.id,
-    productName: item.product.name,
-    totalPayed: item.amount * item.product.price,
-  }));
+  const txs = data.getTransactions.transactions
+    .map((item) => ({
+      ...item,
+      key: item.id,
+      customerId: item.customer.id,
+      productId: item.product.id,
+      productName: item.product.name,
+      totalPayed: item.amount * item.product.price,
+    }))
+    .sort((a, b) => a.id - b.id);
 
   return (
     <>
