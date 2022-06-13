@@ -1,12 +1,20 @@
-import React, { useEffect } from 'react';
-import { Row, Col, Breadcrumb, Input } from 'antd';
+import React, { useContext, useEffect } from 'react';
+import { Row, Col, Breadcrumb, Input, message } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { profile } from './icons';
+import { UserContext } from '../../../store/UserContext';
 
 function Header({ name, subName }) {
   // eslint-disable-next-line no-undef
   useEffect(() => window.scrollTo(0, 0));
+
+  const { isLoggedIn, logout } = useContext(UserContext);
+
+  const onLogout = () => {
+    logout();
+    message.success('로그아웃이 완료되었습니다.');
+  };
 
   return (
     <>
@@ -25,10 +33,18 @@ function Header({ name, subName }) {
           </div>
         </Col>
         <Col span={24} md={18} className="header-control">
-          <Link to="/sign-in" className="btn-sign-in">
-            {profile}
-            <span>로그인</span>
-          </Link>
+          {isLoggedIn ? (
+            <Link to="/dashboard" onClick={onLogout} className="btn-sign-in">
+              {profile}
+              <span>로그아웃</span>
+            </Link>
+          ) : (
+            <Link to="/sign-in" className="btn-sign-in">
+              {profile}
+              <span>로그인</span>
+            </Link>
+          )}
+
           <Input className="header-search" placeholder="Type here..." prefix={<SearchOutlined />} />
         </Col>
       </Row>
