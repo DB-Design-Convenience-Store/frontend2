@@ -3,7 +3,7 @@ import React from 'react';
 import ReturnAddOrChangeForm from './modal_form';
 
 const ReturnAddOrChangeModal = ({ isModalVisible, handleClose, values, refetch }) => {
-  const MODAL_TITLE = 'UOS25 서울시립대점 반품 관리';
+  const MODAL_TITLE = 'UOS25 서울시립대점 반품 내역 등록';
 
   return (
     <Modal

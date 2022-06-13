@@ -3,7 +3,7 @@ import React from 'react';
 import TransactionAddOrChangeForm from './modal_form';
 
 const TransactionAddOrChangeModal = ({ isModalVisible, handleClose, values, refetch }) => {
-  const MODAL_TITLE = 'UOS25 서울시립대점 직원 등록';
+  const MODAL_TITLE = 'UOS25 서울시립대점 거래 내역 등록';
 
   return (
     <Modal

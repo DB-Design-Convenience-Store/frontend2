@@ -3,7 +3,7 @@ import React from 'react';
 import WarehousingAddOrChangeForm from './modal_form';
 
 const ReceivingAddOrChangeModal = ({ isModalVisible, handleClose, values, refetch }) => {
-  const MODAL_TITLE = 'UOS25 서울시립대점 입고 관리';
+  const MODAL_TITLE = 'UOS25 서울시립대점 입고 내역 등록';
 
   return (
     <Modal
