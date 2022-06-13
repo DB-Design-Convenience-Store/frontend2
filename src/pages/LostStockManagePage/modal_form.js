@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
 import moment from 'moment';
-import { Button, DatePicker, Form, Input, InputNumber, message } from 'antd';
+import { Button, Form, Input, InputNumber, message, Select } from 'antd';
+import { useMutation } from '@apollo/client';
+import { NEW_LOSS } from './graphql';
+
+const { Option } = Select;
 
 const formItemLayout = {
   labelCol: {
@@ -23,6 +27,7 @@ const formItemLayout = {
 
 const LostStockAddOrChangeForm = ({ onClose, values }) => {
   const [form] = Form.useForm();
+  const [createLoss, { loading }] = useMutation(NEW_LOSS);
 
   useEffect(() => {
     form.setFieldsValue({
@@ -32,24 +37,39 @@ const LostStockAddOrChangeForm = ({ onClose, values }) => {
     });
   }, [values]);
 
-  /* eslint-disable */
   const onFinish = (values) => {
-    console.log(JSON.stringify(values));
-    message.success("등록에 성공하였습니다: " + JSON.stringify(values));
-    form.resetFields();
-    onClose();
+    console.log('onFinish:', values);
+    createLoss({ variables: { newLoss: values } }).then((result) => {
+      const { ok, error } = result.data.createLoss;
+      if (ok) {
+        message.success('등록에 성공했습니다.');
+        form.resetFields();
+        onClose();
+      } else {
+        message.error('등록에 실패하였습니다: ' + error);
+      }
+    });
   };
 
   const onFinishFailed = (values) => {
-    console.log(JSON.stringify(values));
-    message.error("등록에 실패하였습니다: " + JSON.stringify(values));
-  }
+    console.log('onFinishFailed:', JSON.stringify(values));
+    message.error('잘못된 입력입니다: ' + JSON.stringify(values));
+  };
+
+  if (loading) return <span>로딩 중입니다...</span>;
 
   return (
-    <Form {...formItemLayout} form={form} name="worker" onFinish={onFinish} onFinishFailed={onFinishFailed} size="large" scrollToFirstError>
-
+    <Form
+      {...formItemLayout}
+      form={form}
+      name="worker"
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+      size="large"
+      scrollToFirstError
+    >
       <Form.Item
-        name="product"
+        name="productId"
         label="물품번호"
         rules={[
           {
@@ -82,18 +102,20 @@ const LostStockAddOrChangeForm = ({ onClose, values }) => {
       </Form.Item>
 
       <Form.Item
-        name="createdAt"
-        label="손실 일자"
+        name="location"
+        label="위치"
         rules={[
           {
             required: true,
-            message: '손실 일자는 필수값입니다.',
+            message: '위치는 필수값입니다.',
           },
         ]}
       >
-        <DatePicker />
+        <Select placeholder="위치를 선택해주세요...">
+          <Option value="Warehouse">창고</Option>
+          <Option value="Stand">매대</Option>
+        </Select>
       </Form.Item>
-
 
       <Form.Item
         name="reason"
@@ -107,7 +129,6 @@ const LostStockAddOrChangeForm = ({ onClose, values }) => {
       >
         <Input />
       </Form.Item>
-
 
       <Form.Item>
         <Button type="primary" htmlType="submit">

@@ -1,47 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import gql from 'graphql-tag';
+import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { getColumns } from './columns';
-
 import { Row, Col, Card, Radio, Table, Button } from 'antd';
 import LostStockAddOrChangeModal from './modal';
-
-const ALL_LOSSES = gql`
-  query {
-    getLosses {
-      ok
-      losses {
-        id
-        createdAt
-        updatedAt
-        product {
-          id
-          name
-        }
-        amount
-        reason
-      }
-    }
-  }
-`;
+import { ALL_LOSSES } from './graphql';
 
 function LostStockManagePage() {
-  const { loading, data } = useQuery(ALL_LOSSES);
-  const [losses, setLosses] = useState([]);
-  useEffect(() => {
-    if (!loading) {
-      setLosses(
-        data.getLosses.losses.map((content) => ({
-          id: content.id,
-          product_id: content.product.id,
-          product_name: content.product.name,
-          amount: content.amount,
-          createdAt: content.createdAt.toString().slice(0, 10),
-          reason: content.reason,
-        })),
-      );
-    }
-  }, [loading]);
   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -62,6 +26,19 @@ function LostStockManagePage() {
     showModal();
   };
 
+  const { loading, error, data } = useQuery(ALL_LOSSES);
+  if (loading) return <span>loading...</span>;
+  if (error) return <span>Error!</span>;
+
+  const losses = data.getLosses.losses.map((content) => ({
+    id: content.id,
+    product_id: content.product.id,
+    product_name: content.product.name,
+    amount: content.amount,
+    createdAt: content.createdAt.toString().slice(0, 10),
+    reason: content.reason,
+  }));
+
   return (
     <>
       <div className="tabled">
@@ -80,19 +57,16 @@ function LostStockManagePage() {
               }
             >
               <div className="table-responsive">
-                {!loading && (
-                  <Table
-                    columns={getColumns(triggerModalOpen)}
-                    dataSource={losses}
-                    pagination={false}
-                    className="ant-border-space"
-                  />
-                )}
+                <Table
+                  columns={getColumns(triggerModalOpen)}
+                  dataSource={loading ? [] : losses}
+                  pagination={true}
+                  className="ant-border-space"
+                />
               </div>
             </Card>
           </Col>
         </Row>
-        {/* 아래의 Row, Col 의 배치 방식은 아직 잘 모르겠다. */}
         <Row gutter={[24, 0]}>
           <Col span={6} offset={21}>
             <Button type="primary" onClick={showModal}>
