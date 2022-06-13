@@ -1,6 +1,6 @@
 import { Modal } from 'antd';
 import React from 'react';
-import ReceivingAddOrChangeForm from './modal_form';
+import WarehousingAddOrChangeForm from './modal_form';
 
 const ReceivingAddOrChangeModal = ({ isModalVisible, handleClose, values }) => {
   const MODAL_TITLE = 'UOS25 서울시립대점 입고 관리';
@@ -15,7 +15,7 @@ const ReceivingAddOrChangeModal = ({ isModalVisible, handleClose, values }) => {
       bodyStyle={{ overflowY: 'auto', maxHeight: 'calc(100vh - 300px)' }}
       footer={null}
     >
-      <ReceivingAddOrChangeForm onClose={handleClose} values={values} />
+      <WarehousingAddOrChangeForm onClose={handleClose} values={values} />
     </Modal>
   );
 };

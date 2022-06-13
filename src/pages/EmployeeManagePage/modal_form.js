@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import moment from 'moment';
 import { Button, DatePicker, Form, Input, InputNumber, message, Select } from 'antd';
+import { useMutation } from '@apollo/client';
+import { NEW_EMPLOYEE } from './graphql';
 
 const { Option } = Select;
 
@@ -25,6 +27,7 @@ const formItemLayout = {
 
 const EmployeeAddOrChangeForm = ({ onClose, values }) => {
   const [form] = Form.useForm();
+  const [createUser, { loading }] = useMutation(NEW_EMPLOYEE);
 
   useEffect(() => {
     form.setFieldsValue({
@@ -36,21 +39,62 @@ const EmployeeAddOrChangeForm = ({ onClose, values }) => {
     });
   }, [values]);
 
-  /* eslint-disable */
   const onFinish = (values) => {
-    console.log(JSON.stringify(values));
-    message.success("등록에 성공하였습니다: " + JSON.stringify(values));
-    form.resetFields();
-    onClose();
+    console.log('onFinish:', values);
+    createUser({ variables: { newUser: values } }).then((result) => {
+      const { ok, error } = result.data.createUser;
+      if (ok) {
+        message.success('등록에 성공했습니다.');
+        form.resetFields();
+        onClose();
+      } else {
+        message.error('등록에 실패하였습니다: ' + error);
+      }
+    });
   };
 
   const onFinishFailed = (values) => {
-    console.log(JSON.stringify(values));
-    message.error("등록에 실패하였습니다: " + JSON.stringify(values));
-  }
+    console.log('onFinishFailed:', JSON.stringify(values));
+    message.error('잘못된 입력입니다: ' + JSON.stringify(values));
+  };
+
+  if (loading) return <span>로딩 중입니다...</span>;
 
   return (
-    <Form {...formItemLayout} form={form} name="worker" onFinish={onFinish} onFinishFailed={onFinishFailed} size="large" scrollToFirstError>
+    <Form
+      {...formItemLayout}
+      form={form}
+      name="worker"
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+      size="large"
+      scrollToFirstError
+    >
+      <Form.Item
+        name="email"
+        label="이메일"
+        rules={[
+          {
+            required: true,
+            message: '이메일은 필수값입니다.',
+          },
+        ]}
+      >
+        <Input type="email" />
+      </Form.Item>
+
+      <Form.Item
+        name="password"
+        label="비밀번호"
+        rules={[
+          {
+            required: true,
+            message: '비밀번호는 필수값입니다.',
+          },
+        ]}
+      >
+        <Input type="password" />
+      </Form.Item>
       <Form.Item
         name="name"
         label="이름"
@@ -75,8 +119,8 @@ const EmployeeAddOrChangeForm = ({ onClose, values }) => {
         ]}
       >
         <Select placeholder="역할을 선택해주세요...">
-          <Option value="manager">매니저</Option>
-          <Option value="parttime">알바</Option>
+          <Option value="Manager">매니저</Option>
+          <Option value="PartTime">알바</Option>
         </Select>
       </Form.Item>
 
@@ -143,20 +187,7 @@ const EmployeeAddOrChangeForm = ({ onClose, values }) => {
         <DatePicker />
       </Form.Item>
 
-      <Form.Item
-        name="firedDate"
-        label="해고일자"
-        rules={[
-          {
-            required: true,
-            message: '해고일자는 필수값입니다.',
-          },
-        ]}
-      >
-        <DatePicker />
-      </Form.Item>
-
-      <Form.Item
+      {/* <Form.Item
         name="payDate"
         label="급여지급일자"
         rules={[
@@ -167,7 +198,7 @@ const EmployeeAddOrChangeForm = ({ onClose, values }) => {
         ]}
       >
         <DatePicker />
-      </Form.Item>
+      </Form.Item> */}
 
       <Form.Item>
         <Button type="primary" htmlType="submit">

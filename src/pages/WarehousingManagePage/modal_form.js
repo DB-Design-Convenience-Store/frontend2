@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import moment from 'moment';
-import { Button, Form, Input, InputNumber, message, Select } from 'antd';
+import { Button, Form, Select, InputNumber, message } from 'antd';
 import { useMutation } from '@apollo/client';
-import { NEW_LOSS } from './graphql';
+import { NEW_WAREHOUSING } from './graphql';
 
 const { Option } = Select;
 
@@ -25,13 +25,14 @@ const formItemLayout = {
   },
 };
 
-const LostStockAddOrChangeForm = ({ onClose, values }) => {
+const WarehousingAddOrChangeForm = ({ onClose, values }) => {
   const [form] = Form.useForm();
-  const [createLoss, { loading }] = useMutation(NEW_LOSS);
+  const [createWarehousing, { loading }] = useMutation(NEW_WAREHOUSING);
 
   useEffect(() => {
     form.setFieldsValue({
       ...values,
+      isRefund: values.isRefund ? 'true' : 'false',
       // date picker는 moment를 써줘야 함 (antd)
       createdAt: !values.createdAt ? '' : moment(values.createdAt),
     });
@@ -39,8 +40,8 @@ const LostStockAddOrChangeForm = ({ onClose, values }) => {
 
   const onFinish = (values) => {
     console.log('onFinish:', values);
-    createLoss({ variables: { newLoss: values } }).then((result) => {
-      const { ok, error } = result.data.createLoss;
+    createWarehousing({ variables: { newWarehousing: values } }).then((result) => {
+      const { ok, error } = result.data.createWarehousing;
       if (ok) {
         message.success('등록에 성공했습니다.');
         form.resetFields();
@@ -70,11 +71,11 @@ const LostStockAddOrChangeForm = ({ onClose, values }) => {
     >
       <Form.Item
         name="productId"
-        label="물품번호"
+        label="물품 번호"
         rules={[
           {
             required: true,
-            message: '물품번호는 필수값입니다',
+            message: '물품 번호는 필수값입니다.',
           },
         ]}
       >
@@ -84,13 +85,14 @@ const LostStockAddOrChangeForm = ({ onClose, values }) => {
           }}
         />
       </Form.Item>
+
       <Form.Item
         name="amount"
         label="개수"
         rules={[
           {
             required: true,
-            message: '개수는 필수값입니다',
+            message: '개수는 필수값입니다.',
           },
         ]}
       >
@@ -117,19 +119,6 @@ const LostStockAddOrChangeForm = ({ onClose, values }) => {
         </Select>
       </Form.Item>
 
-      <Form.Item
-        name="reason"
-        label="손실 사유"
-        rules={[
-          {
-            required: true,
-            message: '손실 사유는 필수값입니다.',
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
-
       <Form.Item>
         <Button type="primary" htmlType="submit">
           등록하기
@@ -139,4 +128,4 @@ const LostStockAddOrChangeForm = ({ onClose, values }) => {
   );
 };
 
-export default LostStockAddOrChangeForm;
+export default WarehousingAddOrChangeForm;

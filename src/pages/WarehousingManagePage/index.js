@@ -1,45 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import gql from 'graphql-tag';
+import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { getColumns } from './columns';
-
 import { Row, Col, Card, Radio, Table, Button } from 'antd';
 import ReceivingAddOrChangeModal from './modal';
+import { ALL_WAREHOUSINGS } from './graphql';
 
-const ALL_RECEIVINGS = gql`
-  query {
-    getWarehousings {
-      ok
-      warehousings {
-        id
-        createdAt
-        updatedAt
-        product {
-          id
-          name
-        }
-        amount
-      }
-    }
-  }
-`;
-
-function ReceivingManagePage() {
-  const { loading, data } = useQuery(ALL_RECEIVINGS);
-  const [receivings, setReceivings] = useState([]);
-  useEffect(() => {
-    if (!loading) {
-      setReceivings(
-        data.getWarehousings.warehousings.map((content) => ({
-          id: content.id,
-          product_id: content.product.id,
-          product_name: content.product.name,
-          amount: content.amount,
-          date: content.createdAt.toString().slice(0, 10),
-        })),
-      );
-    }
-  }, [loading]);
+function WarehousingManagePage() {
   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -59,6 +25,21 @@ function ReceivingManagePage() {
     showModal();
   };
 
+  // useQuery가 hooks 중 맨 아래에 와야 하는 것 같습니다~
+  const { loading, error, data } = useQuery(ALL_WAREHOUSINGS);
+
+  if (loading) return <span>loading...</span>;
+  if (error) return <span>Error!</span>;
+
+  const w = data.getWarehousings.warehousings.map((content) => ({
+    key: content.id,
+    id: content.id,
+    product_id: content.product.id,
+    product_name: content.product.name,
+    amount: content.amount,
+    date: content.createdAt.toString().slice(0, 10),
+  }));
+
   return (
     <>
       <div className="tabled">
@@ -77,14 +58,12 @@ function ReceivingManagePage() {
               }
             >
               <div className="table-responsive">
-                {!loading && (
-                  <Table
-                    columns={getColumns(triggerModalOpen)}
-                    dataSource={receivings}
-                    pagination={false}
-                    className="ant-border-space"
-                  />
-                )}
+                <Table
+                  columns={getColumns(triggerModalOpen)}
+                  dataSource={loading ? [] : w}
+                  pagination={true}
+                  className="ant-border-space"
+                />
               </div>
             </Card>
           </Col>
@@ -102,4 +81,4 @@ function ReceivingManagePage() {
   );
 }
 
-export default ReceivingManagePage;
+export default WarehousingManagePage;

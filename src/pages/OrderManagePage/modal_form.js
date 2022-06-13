@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import moment from 'moment';
-import { Button, Form, Input, InputNumber, message } from 'antd';
+import { Button, Form, InputNumber, message } from 'antd';
+import { NEW_ORDER } from './graphql';
+import { useMutation } from '@apollo/client';
 
 const formItemLayout = {
   labelCol: {
@@ -23,7 +25,7 @@ const formItemLayout = {
 
 const OrderAddOrChangeForm = ({ onClose, values }) => {
   const [form] = Form.useForm();
-  const today = new Date().toISOString().slice(0, 10);
+  const [createOrder, { loading }] = useMutation(NEW_ORDER);
 
   useEffect(() => {
     form.setFieldsValue({
@@ -36,53 +38,52 @@ const OrderAddOrChangeForm = ({ onClose, values }) => {
     });
   }, [values]);
 
-  /* eslint-disable */
   const onFinish = (values) => {
-    console.log(JSON.stringify(values));
-    message.success("등록에 성공하였습니다: " + JSON.stringify(values));
-    form.resetFields();
-    onClose();
+    console.log('onFinish:', values);
+    createOrder({ variables: { newOrder: values } }).then((result) => {
+      const { ok, error } = result.data.createOrder;
+      if (ok) {
+        message.success('등록에 성공했습니다.');
+        form.resetFields();
+        onClose();
+      } else {
+        message.error('등록에 실패하였습니다: ' + error);
+      }
+    });
   };
 
   const onFinishFailed = (values) => {
-    console.log(JSON.stringify(values));
-    message.error("등록에 실패하였습니다: " + JSON.stringify(values));
-  }
+    console.log('onFinishFailed:', JSON.stringify(values));
+    message.error('잘못된 입력입니다: ' + JSON.stringify(values));
+  };
+
+  if (loading) return <span>로딩 중입니다...</span>;
 
   return (
-    <Form {...formItemLayout} form={form} name="worker" onFinish={onFinish} onFinishFailed={onFinishFailed} size="large" scrollToFirstError>
+    <Form
+      {...formItemLayout}
+      form={form}
+      name="worker"
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+      size="large"
+      scrollToFirstError
+    >
       <Form.Item
-        name="id"
-        label="발주 번호"
+        name="productId"
+        label="물품 번호"
         rules={[
           {
             required: true,
-            message: '발주 번호는 필수값입니다.',
+            message: '물품 번호는 필수값입니다.',
           },
         ]}
       >
-      <InputNumber
-        style={{
-          width: '100%',
-        }}
-      />
-      </Form.Item>
-
-      <Form.Item
-        name="product_id"
-        label="물품 번호"
-		rules={[
-		  {
-			required: true,
-			 message: '물품 번호는 필수값입니다.',
-		  },
-		]}
-      >
-      <InputNumber
-        style={{
-          width: '100%',
-        }}
-      />
+        <InputNumber
+          style={{
+            width: '100%',
+          }}
+        />
       </Form.Item>
 
       <Form.Item
@@ -95,29 +96,28 @@ const OrderAddOrChangeForm = ({ onClose, values }) => {
           },
         ]}
       >
-      <InputNumber
-        style={{
-          width: '100%',
-        }}
-      />
+        <InputNumber
+          style={{
+            width: '100%',
+          }}
+        />
       </Form.Item>
 
-	  <Form.Item
-        name="date"
-        label="요청일자"
+      <Form.Item
+        name="price"
+        label="가격"
         rules={[
           {
             required: true,
+            message: '가격은 필수값입니다.',
           },
         ]}
       >
-      <Input
-	    disabled
-        style={{
-          width: '100%',
-        }}
-		defaultValue={today}
-      />
+        <InputNumber
+          style={{
+            width: '100%',
+          }}
+        />
       </Form.Item>
 
       <Form.Item>

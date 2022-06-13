@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import moment from 'moment';
-import { Button, DatePicker, Form, Input, InputNumber, message, Select } from 'antd';
+import { Button, Form, InputNumber, message, Select } from 'antd';
+import { useMutation } from '@apollo/client';
+import { NEW_FUND } from './graphql';
 
 const { Option } = Select;
 
@@ -25,31 +26,51 @@ const formItemLayout = {
 
 const FundAddOrChangeForm = ({ onClose, values }) => {
   const [form] = Form.useForm();
+  const [createFund, { loading }] = useMutation(NEW_FUND);
 
   useEffect(() => {
-    form.setFieldsValue({
-      ...values,
-      // date picker는 moment를 써줘야 함 (antd)
-      isIncome: values.isIncome ? 'true' : 'false',
-      insertedAt: !values.insertedAt ? '' : moment(values.insertedAt),
-    });
+    form.setFieldsValue(values);
   }, [values]);
 
-  /* eslint-disable */
   const onFinish = (values) => {
-    console.log(JSON.stringify(values));
-    message.success("등록에 성공하였습니다: " + JSON.stringify(values));
-    form.resetFields();
-    onClose();
+    console.log('onFinish:', values);
+    createFund({
+      variables: {
+        newFund: {
+          ...values,
+          // boolean 타입으로 보내야 함.
+          isIncome: values.isIncome === 'true' ? true : false,
+        },
+      },
+    }).then((result) => {
+      const { ok, error } = result.data.createFund;
+      if (ok) {
+        message.success('등록에 성공했습니다.');
+        form.resetFields();
+        onClose();
+      } else {
+        message.error('등록에 실패하였습니다: ' + error);
+      }
+    });
   };
 
   const onFinishFailed = (values) => {
-    console.log(JSON.stringify(values));
-    message.error("등록에 실패하였습니다: " + JSON.stringify(values));
-  }
+    console.log('onFinishFailed:', JSON.stringify(values));
+    message.error('잘못된 입력입니다: ' + JSON.stringify(values));
+  };
+
+  if (loading) return <span>로딩 중입니다...</span>;
 
   return (
-    <Form {...formItemLayout} form={form} name="worker" onFinish={onFinish} onFinishFailed={onFinishFailed} size="large" scrollToFirstError>
+    <Form
+      {...formItemLayout}
+      form={form}
+      name="worker"
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+      size="large"
+      scrollToFirstError
+    >
       <Form.Item
         name="isIncome"
         label="수입 여부"
@@ -76,11 +97,17 @@ const FundAddOrChangeForm = ({ onClose, values }) => {
           },
         ]}
       >
-        <Input />
+        <Select placeholder="종류를 선택해주세요...">
+          <Option value="Return">반품</Option>
+          <Option value="Order">발주</Option>
+          <Option value="Sale">판매</Option>
+          <Option value="Refund">환불</Option>
+          <Option value="Salary">급여</Option>
+        </Select>
       </Form.Item>
 
       <Form.Item
-        name="amount"
+        name="price"
         label="금액"
         rules={[
           {
@@ -94,19 +121,6 @@ const FundAddOrChangeForm = ({ onClose, values }) => {
             width: '100%',
           }}
         />
-      </Form.Item>
-
-      <Form.Item
-        name="insertedAt"
-        label="입력 시점"
-        rules={[
-          {
-            required: true,
-            message: '입력 시점은 필수값입니다.',
-          },
-        ]}
-      >
-        <DatePicker />
       </Form.Item>
 
       <Form.Item>
