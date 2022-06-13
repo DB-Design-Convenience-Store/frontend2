@@ -1,8 +1,9 @@
 import React from 'react';
-import { Avatar, Typography } from 'antd';
-const { Title } = Typography;
 
-import face from '@assets/images/face-1.jpg';
+// 숫자에 컴마 표시
+function printNumberWithCommas(number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
 
 // table code start
 export const getColumns = () => [
@@ -13,13 +14,18 @@ export const getColumns = () => [
   },
   {
     title: '물품 번호',
-    dataIndex: 'product',
-    key: 'product',
+    dataIndex: 'productId',
+    key: 'productId',
+  },
+  {
+    title: '물품명',
+    dataIndex: 'productName',
+    key: 'productName',
   },
   {
     title: '고객 번호',
-    dataIndex: 'customer',
-    key: 'customer',
+    dataIndex: 'customerId',
+    key: 'customerId',
   },
   {
     title: '개수',
@@ -30,30 +36,24 @@ export const getColumns = () => [
     title: '거래 일자',
     key: 'createdAt',
     dataIndex: 'createdAt',
+    render: function (text) {
+      return <span>{!text ? '' : text.slice(0, 10)}</span>;
+    },
+  },
+  {
+    title: '거래 금액',
+    dataIndex: 'totalPayed',
+    key: 'totalPayed',
+    render: function (text) {
+      return <span style={{ fontWeight: 'bold' }}>{printNumberWithCommas(text)}원</span>;
+    },
   },
   {
     title: '환불 여부',
     dataIndex: 'isRefund',
     key: 'isRefund',
     render: function (text) {
-      return <span>{text ? '환불' : '판매'}</span>;
-    },
-  },
-  {
-    title: '거래 담당자',
-    dataIndex: 'transactionManager',
-    key: 'transactionManager',
-    render: function () {
-      return (
-        <>
-          <Avatar.Group>
-            <Avatar className="shape-avatar" shape="square" size={40} src={face}></Avatar>
-            <div className="avatar-info">
-              <Title level={5}>김성빈</Title>
-            </div>
-          </Avatar.Group>{' '}
-        </>
-      );
+      return <span style={{ fontWeight: 'bold', color: text ? 'red' : 'green' }}>{text ? '환불' : '판매'}</span>;
     },
   },
 ];
