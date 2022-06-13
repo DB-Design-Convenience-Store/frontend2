@@ -11,13 +11,16 @@ export const getColumns = () => [
     title: '물품 이름',
     dataIndex: 'name',
     key: 'name',
+    render: function (text) {
+      return <span>{text}</span>;
+    },
   },
   {
     title: '매대',
     dataIndex: 'stand',
     key: 'stand',
     render: function (_, record) {
-      return <span>{record.location === 'Stand' ? 'O' : ''}</span>;
+      return <span style={{ fontWeight: 'bold' }}>{record.location === 'Stand' ? 'O' : ''}</span>;
     },
   },
   {
@@ -25,7 +28,7 @@ export const getColumns = () => [
     key: 'warehouse',
     dataIndex: 'warehouse',
     render: function (_, record) {
-      return <span>{record.location === 'Warehouse' ? 'O' : ''}</span>;
+      return <span style={{ fontWeight: 'bold' }}>{record.location === 'Warehouse' ? 'O' : ''}</span>;
     },
   },
   {

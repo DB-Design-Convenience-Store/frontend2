@@ -7,6 +7,26 @@ function printNumberWithCommas(number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
+const TypeMapping = {
+  Return: '반품',
+  Order: '발주',
+  Sale: '판매',
+  Refund: '환불',
+  Salary: '급여',
+};
+
+const MoneyColorMapping = (type) => {
+  switch (type) {
+    case 'Sale':
+    case 'Return':
+      return 'green';
+    case 'Order':
+    case 'Refund':
+    case 'Salary':
+      return 'red';
+  }
+};
+
 // table code start
 export const getColumns = (triggerModalOpen) => [
   {
@@ -26,13 +46,20 @@ export const getColumns = (triggerModalOpen) => [
     title: '종류',
     key: 'type',
     dataIndex: 'type',
+    render: function (text) {
+      return <span style={{ fontWeight: 'bold' }}>{TypeMapping[text]}</span>;
+    },
   },
   {
     title: '금액',
     key: 'amount',
     dataIndex: 'amount',
-    render: function (text) {
-      return <span>{printNumberWithCommas(text)}원</span>;
+    render: function (text, record) {
+      return (
+        <span style={{ fontWeight: 'bold', color: MoneyColorMapping(record.type) }}>
+          {printNumberWithCommas(text)}원
+        </span>
+      );
     },
   },
   {
