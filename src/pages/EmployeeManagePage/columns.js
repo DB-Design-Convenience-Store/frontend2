@@ -22,7 +22,7 @@ const getRandomFace = () => {
 
 // 숫자에 컴마 표시
 function printNumberWithCommas(number) {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return !number ? '' : number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
 // table code start
@@ -54,10 +54,14 @@ export const getColumns = (triggerModalOpen) => [
     dataIndex: 'role',
     key: 'role',
     render: function (text) {
+      const mapping = {
+        PartTime: '알바',
+        Manager: '매니저',
+      };
       return (
         <>
           <div className="author-info">
-            <Title level={5}>{text}</Title>
+            <Title level={5}>{mapping[text]}</Title>
             <p>UOS25</p>
           </div>
         </>
@@ -108,17 +112,26 @@ export const getColumns = (triggerModalOpen) => [
     title: '고용일자',
     key: 'hiredDate',
     dataIndex: 'hiredDate',
+    render: function (text) {
+      return <span>{!text ? '' : text.slice(0, 10)}</span>;
+    },
   },
 
   {
     title: '해고일자',
     key: 'firedDate',
     dataIndex: 'firedDate',
+    render: function (text) {
+      return <span>{!text ? '' : text.slice(0, 10)}</span>;
+    },
   },
   {
     title: '급여지급일자',
     key: 'payDate',
     dataIndex: 'payDate',
+    render: function (text) {
+      return <span>{!text ? '' : text.slice(0, 10)}</span>;
+    },
   },
   {
     title: '수정',

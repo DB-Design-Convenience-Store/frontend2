@@ -1,51 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import gql from 'graphql-tag';
+import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { getColumns } from './columns';
-
 import { Row, Col, Card, Radio, Table, Button } from 'antd';
 import EmployeeAddOrChangeModal from './modal';
-
-const ALL_EMPLOYEES = gql`
-  query {
-    getUsers {
-      ok
-      users {
-        id
-        name
-        role
-        dayWorkTime
-        nightWorkTime
-        salary
-        hiredDate
-        firedDate
-        payDate
-      }
-    }
-  }
-`;
+import { ALL_EMPLOYEES } from './graphql';
 
 function EmployeeManagePage() {
-  const { loading, data } = useQuery(ALL_EMPLOYEES);
-  const [employees, setEmployees] = useState([]);
-  useEffect(() => {
-    if (!loading) {
-      setEmployees(
-        data.getUsers.users.map((content) => ({
-          id: content.id,
-          name: content.name,
-          role: content.role,
-          status: '',
-          dayWorkTime: content.dayWorkTime,
-          nightWorkTime: content.nightWorkTime,
-          salary: content.salary,
-          hiredDate: content.hiredDate,
-          firedDate: content.firedDate,
-          payDate: content.payDate,
-        })),
-      );
-    }
-  }, [loading]);
   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -66,6 +26,23 @@ function EmployeeManagePage() {
     showModal();
   };
 
+  // useQuery가 hooks 중 맨 아래에 와야 하는 것 같습니다~
+  const { loading, error, data } = useQuery(ALL_EMPLOYEES);
+
+  if (loading) return <span>loading...</span>;
+  if (error) return <span>Error!</span>;
+
+  const employees = data.getUsers.users
+    .map((emp) => ({
+      ...emp,
+      hiredDate: !emp.hiredDate ? '' : emp.hiredDate.slice(0, 10),
+      firedDate: !emp.firedDate ? '' : emp.firedDate.slice(0, 10),
+      payDate: !emp.payDate ? '' : emp.payDate.slice(0, 10),
+      status: '근무중',
+    }))
+    // 직원 번호 순으로 정렬되지 않아서 옴
+    .sort((a, b) => a.id - b.id);
+
   return (
     <>
       <div className="tabled">
@@ -85,14 +62,12 @@ function EmployeeManagePage() {
               }
             >
               <div className="table-responsive">
-                {!loading && (
-                  <Table
-                    columns={getColumns(triggerModalOpen)}
-                    dataSource={employees}
-                    pagination={false}
-                    className="ant-border-space"
-                  />
-                )}
+                <Table
+                  columns={getColumns(triggerModalOpen)}
+                  dataSource={loading ? [] : employees}
+                  pagination={true}
+                  className="ant-border-space"
+                />
               </div>
             </Card>
           </Col>
