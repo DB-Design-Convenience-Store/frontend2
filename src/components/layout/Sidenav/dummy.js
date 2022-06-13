@@ -59,7 +59,7 @@ export const navList = [
   },
   {
     header: false,
-    link: '/receiving',
+    link: '/warehousing',
     icon: tables,
     name: '입고 관리',
   },
